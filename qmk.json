@@ -1,7 +1,4 @@
 {
     "userspace_version": "1.0",
-    "build_targets": [
-        ["bastardkb/scylla", "vendor"],
-        ["bastardkb/scylla", "feuerdev"]
-    ]
+    "build_targets": [["bastardkb/scylla", "feuerdev"]]
 }
