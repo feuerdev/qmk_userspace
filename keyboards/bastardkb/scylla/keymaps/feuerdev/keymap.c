@@ -16,6 +16,18 @@
 
 #include QMK_KEYBOARD_H
 
+// Homerow mods definitions for CAGS (Ctrl, Alt, GUI, Shift)
+#define LCTL_A LCTL_T(KC_A)
+#define LALT_R LALT_T(KC_R)
+#define LGUI_S LGUI_T(KC_S)
+#define LSFT_T LSFT_T(KC_T)
+
+// Reversed order on the right hand to mirror left hand (SGAC)
+#define RSFT_N RSFT_T(KC_N)
+#define RGUI_E RGUI_T(KC_E)
+#define RALT_I RALT_T(KC_I)
+#define RCTL_O RCTL_T(KC_O)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // 0 - Alpha layer
@@ -23,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                  KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_A, KC_R, KC_S, KC_T, KC_G,                  KC_M, KC_N, KC_E, KC_I, KC_O, KC_NO,
+                             KC_NO, LCTL_A, LALT_R, LGUI_S, LSFT_T, KC_G,          KC_M, RSFT_N, RGUI_E, RALT_I, RCTL_O, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
