@@ -44,4 +44,87 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
     
+    // 1 - 
+    [1] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS),
+
+    // 2 -                             
+    [2] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS),
+
+    // 3 - 
+    [3] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS),
+
+    // 4 - 
+    [4] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS),
+
+    // 5 - 
+    [5] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS),
+
+    // 6 - 
+    [6] = LAYOUT_split_4x6_5(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS, KC_TRNS,                                     KC_TRNS, KC_TRNS, KC_TRNS,
+                             //-------------------------------------------------//-----------------------------------------------------------//
+                             KC_TRNS, KC_TRNS,                                              KC_TRNS, KC_TRNS)
 };
