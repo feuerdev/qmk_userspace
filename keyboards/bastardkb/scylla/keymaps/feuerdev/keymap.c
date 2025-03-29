@@ -28,10 +28,16 @@
  #define HOME_I LALT_T(KC_I)
  #define HOME_O RCTL_T(KC_O)
  
+ // Define custom keycodes
+ enum custom_keycodes {
+     BOOT_L = SAFE_RANGE,
+     BOOT_R,
+ };
+ 
  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
      // 0 - Alpha layer
-     [0] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
+     [0] = LAYOUT_split_4x6_5(BOOT_L, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
                               //-------------------------------------------------//-----------------------------------------------------------//
                               KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                  KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_NO,
                               //-------------------------------------------------//-----------------------------------------------------------//
@@ -141,4 +147,27 @@
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              QK_CAPS_WORD_TOGGLE, KC_NO,                                    KC_NO, KC_NO),
  };
+
+// Define combo for bootloader
+enum combo_events {
+  COMBO_BOOTLOADER,
+  COMBO_COUNT
+};
+
+const uint16_t PROGMEM bootloader_combo[] = {BOOT_L, BOOT_R, COMBO_END};
+combo_t key_combos[] = {
+  [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
+};
+
+// Handle the custom keycodes (they do nothing on their own)
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case BOOT_L:
+        case BOOT_R:
+            // These keys do nothing on their own
+            return false;
+        default:
+            return true;
+    }
+}
  
