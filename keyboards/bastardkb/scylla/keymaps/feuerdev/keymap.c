@@ -130,9 +130,9 @@
      // 7 - One Handed layer (for mouse use)
      [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, LGUI(KC_Z), LGUI(KC_LSFT(KC_Z)), KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, LGUI(KC_Z), KC_NO, KC_NO, KC_NO,                 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_NO,                  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
