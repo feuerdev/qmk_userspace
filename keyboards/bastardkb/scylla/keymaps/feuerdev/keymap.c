@@ -136,18 +136,18 @@
                              QK_CAPS_WORD_TOGGLE, KC_NO,                            KC_NO, KC_NO),
  
      // 7 - One Handed layer (for mouse use)
-     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,  TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,              TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, LGUI(KC_X), LGUI(KC_C), KC_NO, LGUI(KC_V), KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, LGUI(KC_X), LGUI(KC_C), KC_NO, LGUI(KC_V), KC_NO,       TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_BSPC, KC_SPC, KC_TAB,                                       KC_NO, KC_NO, KC_NO,
+                             KC_BSPC, KC_SPC, KC_TAB,                                       TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                                    KC_NO, TG(7)),
+                             QK_CAPS_WORD_TOGGLE, KC_NO,                                    TG(7), TG(7)),
  };
 
 // Define combos for bootloader and EEPROM reset
