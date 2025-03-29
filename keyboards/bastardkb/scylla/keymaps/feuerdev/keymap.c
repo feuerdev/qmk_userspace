@@ -44,7 +44,7 @@
                               //-------------------------------------------------//-----------------------------------------------------------//
                               KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 1 - Nav layer
+     // 1 - Media layer
      [1] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -58,7 +58,7 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 2 - Mouse layer
+     // 2 - Nav layer
      [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -72,7 +72,7 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 3 - Button layer
+     // 3 - Mouse layer
      [3] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -86,7 +86,7 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 4 - Media layer
+     // 4 - Symbol 2 layer
      [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -100,21 +100,21 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 5 - Coding layer
-     [5] = LAYOUT_split_4x6_5(KC_5, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
+     // 5 - Symbol 1 layer
+     [5] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                  KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                  KC_NO, KC_NO, KC_NO, KC_NO, KC_SCLN, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G,          KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                  KC_NO, KC_NO, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              LT(1, KC_ESC), LT(2, KC_SPC), LT(3, KC_TAB),           LT(4, KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL), 
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                        KC_NO, KC_NO),
  
-     // 6 - Symbol layer
+     // 6 - Function layer
      [6] = LAYOUT_split_4x6_5(KC_6, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,                  KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_NO,
