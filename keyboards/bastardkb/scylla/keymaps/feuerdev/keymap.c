@@ -124,11 +124,11 @@
      // 6 - Function layer
      [6] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_F7, KC_F8, KC_F9, KC_F12,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_F7, KC_F8, KC_F9, KC_F12, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_F4, KC_F5, KC_F6, KC_F11,             KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
+                             KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,            KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F10,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_F1, KC_F2, KC_F3, KC_F10, KC_NO,          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_ESC, KC_SPC, KC_TAB,                                KC_NO, KC_NO, KC_NO, 
@@ -138,11 +138,11 @@
      // 7 - One Handed layer (for mouse use)
      [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, LGUI(KC_A), LGUI(KC_Z), KC_NO, KC_NO, KC_NO,                 KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, LGUI(KC_X), LGUI(KC_C), KC_NO, LGUI(KC_V), KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_BSPC, KC_SPC, KC_TAB,                                       KC_NO, KC_NO, KC_NO,
