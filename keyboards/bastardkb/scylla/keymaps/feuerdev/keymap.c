@@ -35,7 +35,15 @@
      EE_RST_L,
      EE_RST_R,
  };
- 
+
+// Custom shift keys configuration
+const custom_shift_key_t custom_shift_keys[] = {
+  {KC_DOT, KC_QUES},  // Shift . is ?
+  {KC_COMM, KC_EXLM}, // Shift , is !
+  {KC_MINS, KC_EQL},  // Shift - is =
+  {KC_COLN, KC_SCLN}, // Shift : is ;
+};
+
  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
      // 0 - Alpha layer
