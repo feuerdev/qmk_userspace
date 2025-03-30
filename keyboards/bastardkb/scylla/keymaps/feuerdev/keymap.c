@@ -53,7 +53,7 @@
                               QK_CAPS_WORD_TOGGLE, KC_NO,                           KC_NO, TG(7)),
  
      // 1 - Media layer
-     [1] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17,      KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_NO,
+     [1] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
