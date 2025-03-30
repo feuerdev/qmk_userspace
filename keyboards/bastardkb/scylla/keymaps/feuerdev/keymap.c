@@ -69,7 +69,7 @@
      // 2 - Nav layer
      [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, LGUI(KC_GRV), LGUI(KC_TAB), LGUI(S(KC_TAB)), KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, LGUI(KC_GRV), LGUI(S(KC_TAB)), KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,    KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
