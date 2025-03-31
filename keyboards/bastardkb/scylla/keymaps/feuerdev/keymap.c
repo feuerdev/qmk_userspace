@@ -67,7 +67,7 @@
                              QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
  
      // 2 - Nav layer
-     [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+     [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_F13, KC_F16, KC_F17, KC_F18, KC_F19, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, LGUI(KC_GRV), LGUI(S(KC_TAB)), KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
