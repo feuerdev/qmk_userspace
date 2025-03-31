@@ -50,7 +50,7 @@
                               //-------------------------------------------------//-----------------------------------------------------------//
                               LT(1, KC_ESC), LT(2, KC_SPC), LT(3, KC_TAB),          LT(4, KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL), 
                               //-------------------------------------------------//-----------------------------------------------------------//
-                              QK_CAPS_WORD_TOGGLE, KC_NO,                           KC_NO, TG(7)),
+                              QK_CAPS_WORD_TOGGLE, TG(7),                           KC_NO, KC_NO),
  
      // 1 - Media layer
      [1] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
