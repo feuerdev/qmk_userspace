@@ -139,7 +139,7 @@
                              QK_CAPS_WORD_TOGGLE, KC_NO,                            KC_NO, KC_NO),
  
      // 7 - One Handed layer (for mouse use)
-     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)),                     TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,  TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
