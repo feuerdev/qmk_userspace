@@ -156,15 +156,18 @@
 enum combo_events {
   COMBO_BOOTLOADER,
   COMBO_EE_RESET,
+  COMBO_CAPSWORD,
   COMBO_COUNT
 };
 
 const uint16_t PROGMEM bootloader_combo[] = {BOOT_L, BOOT_R, COMBO_END};
 const uint16_t PROGMEM ee_reset_combo[] = {EE_RST_L, EE_RST_R, COMBO_END};
+const uint16_t PROGMEM capsword_combo[] = {HOME_T, HOME_N, COMBO_END};
 
 combo_t key_combos[] = {
   [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
   [COMBO_EE_RESET] = COMBO(ee_reset_combo, QK_CLEAR_EEPROM),
+  [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
 };
 
 // Handle the custom keycodes (they do nothing on their own)
