@@ -168,7 +168,7 @@ combo_t key_combos[] = {
 
 // Handle the custom keycodes (they do nothing on their own)
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_achordion(keycode, record)) { return false; }
+    // if (!process_achordion(keycode, record)) { return false; }
 
     switch (keycode) {
         case BOOT_L:
@@ -183,6 +183,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void housekeeping_task_user(void) {
-  achordion_task();
+  //achordion_task();
 }
  
