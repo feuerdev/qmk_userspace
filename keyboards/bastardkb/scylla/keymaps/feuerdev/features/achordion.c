@@ -338,8 +338,10 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
                                            keyrecord_t* tap_hold_record,
                                            uint16_t other_keycode,
                                            keyrecord_t* other_record) {
-  // Allow same-hand holds with non-alpha keys.
-  if (other_keycode > KC_Z) { return true; }
+  
+  // Check if either key is a thumb key (row 4 in the matrix)
+  if (tap_hold_record->event.key.row > 4) { return true; }
+  
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
 
