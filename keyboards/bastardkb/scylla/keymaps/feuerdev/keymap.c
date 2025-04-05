@@ -36,6 +36,7 @@
      BOOT_R,
      EE_RST_L,
      EE_RST_R,
+     EMAIL,
  };
  
  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -116,7 +117,7 @@
                              //-------------------------------------------------//--------------------------------------------------------------//
                              KC_NO, KC_TILD, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,     KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_SCLN, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
-                             KC_NO, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, KC_NO,      KC_NO, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
+                             KC_NO, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, KC_NO,      EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_ESC, KC_SPC, KC_TAB,                                KC_NO, KC_NO, KC_NO, 
@@ -181,6 +182,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case EE_RST_L:
         case EE_RST_R:
             // These keys do nothing on their own
+            return false;
+        case EMAIL:
+            if (record->event.pressed) {
+                SEND_STRING("jannik@feuer.dev");
+            }
             return false;
         default:
             return true;
