@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Google LLC
+// Copyright 2021-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,87 +13,82 @@
 // limitations under the License.
 
 /**
- * @file custom_shift_keys.h
- * @brief Custom shift keys: customize what keycode is produced when shifted.
- *
- * Overview
- * --------
- *
- * This library implements custom shift keys, keys where you can customize
- * what keycode is produced when shifted.
- *
- * Step 1: In your keymap.c, define a table of custom shift keys like
- *
- *     #include "features/custom_shift_keys.h"
- *
- *     const custom_shift_key_t custom_shift_keys[] = {
- *       {KC_DOT , KC_QUES}, // Shift . is ?
- *       {KC_COMM, KC_EXLM}, // Shift , is !
- *       {KC_MINS, KC_EQL }, // Shift - is =
- *       {KC_COLN, KC_SCLN}, // Shift : is ;
- *     };
- *
- * Each row defines one key. The first field is the keycode as it appears in
- * your layout and determines what is typed normally. The second entry is what
- * you want the key to type when shifted.
- *
- * Step 2: Handle custom shift keys from your `process_record_user` function as
- *
- *     bool process_record_user(uint16_t keycode, keyrecord_t* record) {
- *       if (!process_custom_shift_keys(keycode, record)) { return false; }
- *       // Your macros ...
- *
- *       return true;
- *     }
- *
- * Step 3: add `features/custom_shift_keys.c` to your rules.mk as
- *
- *     SRC += features/custom_shift_keys.c
- *
+ * @file custom_shift_keys.c
+ * @brief Custom Shift Keys implementation
  *
  * For full documentation, see
  * <https://getreuer.info/posts/keyboards/custom-shift-keys>
  */
 
-#pragma once
+#include "custom_shift_keys.h"
 
-#include "quantum.h"
+#if !defined(IS_QK_MOD_TAP)
+// Attempt to detect out-of-date QMK installation, which would fail with
+// implicit-function-declaration errors in the code below.
+#error "custom_shift_keys: QMK version is too old to build. Please update QMK."
+#else
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+bool process_custom_shift_keys(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t registered_keycode = KC_NO;
 
-/**
- * Custom shift key entry. The `keycode` field is the keycode as it appears in
- * your layout and determines what is typed normally. The `shifted_keycode` is
- * what you want the key to type when shifted.
- */
-typedef struct {
-  uint16_t keycode;
-  uint16_t shifted_keycode;
-} custom_shift_key_t;
+  // If a custom shift key is registered, then this event is either releasing
+  // it or manipulating another key at the same time. Either way, we release
+  // the currently registered key.
+  if (registered_keycode != KC_NO) {
+    unregister_code16(registered_keycode);
+    registered_keycode = KC_NO;
+  }
 
-/** Table of custom shift keys. */
-extern const custom_shift_key_t custom_shift_keys[];
-/** Number of entries in the `custom_shift_keys` table. */
-extern uint8_t NUM_CUSTOM_SHIFT_KEYS;
+  if (record->event.pressed) {  // Press event.
+    const uint8_t saved_mods = get_mods();
+#ifndef NO_ACTION_ONESHOT
+    const uint8_t mods = saved_mods | get_weak_mods() | get_oneshot_mods();
+#else
+    const uint8_t mods = saved_mods | get_weak_mods();
+#endif  // NO_ACTION_ONESHOT
+#if CUSTOM_SHIFT_KEYS_LAYER_MASK != 0
+    const uint8_t layer = read_source_layers_cache(record->event.key);
+#endif  // CUSTOM_SHIFT_KEYS_LAYER_MASK
+    if ((mods & MOD_MASK_SHIFT) != 0  // Shift is held.
+#if CUSTOM_SHIFT_KEYS_NEGMODS != 0
+        // Nothing in CUSTOM_SHIFT_KEYS_NEGMODS is held.
+        && (mods & (CUSTOM_SHIFT_KEYS_NEGMODS)) == 0
+#endif  // CUSTOM_SHIFT_KEYS_NEGMODS != 0
+#if CUSTOM_SHIFT_KEYS_LAYER_MASK != 0
+        // Pressed key is on a layer appearing in the layer mask.
+        && ((1 << layer) & (CUSTOM_SHIFT_KEYS_LAYER_MASK)) != 0
+#endif  // CUSTOM_SHIFT_KEYS_LAYER_MASK
+          ) {
+      // Continue default handling if this is a tap-hold key being held.
+      if ((IS_QK_MOD_TAP(keycode) || IS_QK_LAYER_TAP(keycode)) &&
+          record->tap.count == 0) {
+        return true;
+      }
 
-/**
- * Handler function for custom shift keys.
- *
- * In keymap.c, call this function from your `process_record_user` function as
- *
- *     #include "features/custom_shift_keys.h"
- *
- *     bool process_record_user(uint16_t keycode, keyrecord_t* record) {
- *       if (!process_custom_shift_keys(keycode, record)) { return false; }
- *       // Your macros ...
- *
- *       return true;
- *     }
- */
-bool process_custom_shift_keys(uint16_t keycode, keyrecord_t *record);
+      // Search for a custom shift key whose keycode is `keycode`.
+      for (int i = 0; i < NUM_CUSTOM_SHIFT_KEYS; ++i) {
+        if (keycode == custom_shift_keys[i].keycode) {
+          registered_keycode = custom_shift_keys[i].shifted_keycode;
+          if (IS_QK_MODS(registered_keycode) &&  // Should keycode be shifted?
+              (QK_MODS_GET_MODS(registered_keycode) & MOD_LSFT) != 0) {
+            register_code16(registered_keycode);  // If so, press it directly.
+          } else {
+            // Otherwise cancel shift mods, press the key, and restore mods.
+            del_weak_mods(MOD_MASK_SHIFT);
+#ifndef NO_ACTION_ONESHOT
+            del_oneshot_mods(MOD_MASK_SHIFT);
+#endif  // NO_ACTION_ONESHOT
+            unregister_mods(MOD_MASK_SHIFT);
+            register_code16(registered_keycode);
+            set_mods(saved_mods);
+          }
+          return false;
+        }
+      }
+    }
+  }
 
-#ifdef __cplusplus
+  return true;  // Continue with default handling.
 }
-#endif
+
+#endif  // version check
