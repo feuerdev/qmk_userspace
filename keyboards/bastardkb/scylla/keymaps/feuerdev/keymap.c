@@ -94,7 +94,7 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
  
-     // 4 - Symbol 2 layer
+     // 4 - ?
      [4] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_QUOT, KC_LT, KC_GT, KC_DQUO, KC_DOT,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -110,11 +110,11 @@
      // 5 - Symbol 1 layer
      [5] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
-                             KC_NO, KC_PERC, KC_LBRC, KC_RBRC, KC_UNDS, KC_AMPR,    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_NO,      KC_AMPR, KC_GRV, KC_LBRC, KC_LBRC, KC_PERC, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
-                             KC_NO, KC_QUES, KC_LPRN, KC_RPRN, KC_COLN, KC_PIPE,    KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
+                             KC_NO, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,     KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
-                             KC_NO, KC_AT, KC_LCBR, KC_RCBR, KC_DLR, KC_TILD,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, KC_NO,      KC_TILD, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_ESC, KC_SPC, KC_TAB,                                KC_NO, KC_NO, KC_NO, 
