@@ -95,13 +95,13 @@
                              QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
  
      // 4 - ?
-     [4] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
+     [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_QUOT, KC_LT, KC_GT, KC_DQUO, KC_DOT,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,   KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, KC_GRV,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_ESC, KC_SPC, KC_TAB,                              KC_NO, KC_NO, KC_NO, 
