@@ -191,8 +191,9 @@ void housekeeping_task_user(void) {
 const custom_shift_key_t custom_shift_keys[] = {
   {KC_COMM, KC_EXLM}, // Shift , is !
   {KC_DOT , KC_QUES}, // Shift . is ?
-  {KC_SLSH, KC_BSLS}, // Shift / is \
+  {KC_SLSH, KC_BSLS}  // Shift forward slash is backslash
 };
+
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
  
