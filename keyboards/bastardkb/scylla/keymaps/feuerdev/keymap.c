@@ -16,6 +16,7 @@
 
  #include QMK_KEYBOARD_H
  #include "features/achordion.h"
+ #include "features/custom_shift_keys.h"
 
  // Homerow mods definitions for CAGS (Ctrl, Alt, GUI, Shift)
  #define HOME_A LCTL_T(KC_A)
@@ -169,6 +170,7 @@ combo_t key_combos[] = {
 // Handle the custom keycodes (they do nothing on their own)
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
+    if (!process_custom_shift_keys(keycode, record)) { return false; }
 
     switch (keycode) {
         case BOOT_L:
@@ -185,4 +187,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void housekeeping_task_user(void) {
   achordion_task();
 }
+
+const custom_shift_key_t custom_shift_keys[] = {
+  {KC_COMM, KC_EXLM}, // Shift , is !
+  {KC_DOT , KC_QUES}, // Shift . is ?
+  {KC_SLSH, KC_BSLS}, // Shift / is \
+};
+uint8_t NUM_CUSTOM_SHIFT_KEYS =
+    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
  
