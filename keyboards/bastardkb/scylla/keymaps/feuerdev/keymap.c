@@ -113,7 +113,7 @@
      // 5 - Symbol layer
      [5] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
-                             KC_NO, KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_NO,      KC_AMPR, KC_GRV, KC_LBRC, KC_LBRC, KC_PERC, KC_NO,
+                             KC_NO, KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_NO,      KC_AMPR, KC_GRV, KC_LBRC, KC_RBRC, KC_PERC, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
                              KC_NO, KC_TILD, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,     KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_SCLN, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
