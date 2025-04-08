@@ -68,11 +68,11 @@
      // 2 - Nav layer
      [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                       KC_F13, KC_F16, KC_F17, KC_F18, KC_F19, KC_NO,
                              //---------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, HYPR(KC_5), HYPR(KC_6), HYPR(KC_7), HYPR(KC_8), KC_NO,    KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                        KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
                              //---------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,                      KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
+                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_F19, KC_NO,                     KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                              //---------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, HYPR(KC_0), HYPR(KC_9), HYPR(KC_3), HYPR(KC_4), KC_NO,    KC_NO, SW_WIN, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_NO,                    KC_NO, SW_WIN, KC_NO, KC_NO, KC_NO, KC_NO,
                              //---------------------------------------------------------//-----------------------------------------------------------//
                              //---------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO,                                             LGUI_T(KC_ENT), KC_BSPC, KC_DEL,  
