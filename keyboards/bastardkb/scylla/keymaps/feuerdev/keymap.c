@@ -19,16 +19,10 @@
  #include "features/custom_shift_keys.h"
 
  // Homerow mods definitions for CAGS (Ctrl, Alt, GUI, Shift)
- #define HOME_A LCTL_T(KC_A)
- #define HOME_R LALT_T(KC_R)
- #define HOME_S LGUI_T(KC_S)
- #define HOME_T LSFT_T(KC_T)
+ #define HOME_A LSFT_T(KC_A)
  
  // Reversed order on the right hand to mirror left hand (SGAC)
- #define HOME_N RSFT_T(KC_N)
- #define HOME_E RGUI_T(KC_E)
- #define HOME_I LALT_T(KC_I)
- #define HOME_O RCTL_T(KC_O)
+ #define HOME_O RSFT_T(KC_O)
  
  // Define custom keycodes
  enum custom_keycodes {
@@ -38,6 +32,9 @@
      EE_RST_R,
      EMAIL,
  };
+
+ // LGUI(KC_GRV) - Switch windows of current application
+ // LGUI(S(KC_TAB)) - Switch applications (backwards)
  
  const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  
@@ -46,56 +43,56 @@
                               //-------------------------------------------------//-----------------------------------------------------------//
                               EE_RST_L, KC_Q, KC_W, KC_F, KC_P, KC_B,                KC_J, KC_L, KC_U, KC_Y, KC_MINS, EE_RST_R,
                               //-------------------------------------------------//-----------------------------------------------------------//
-                              KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G,          KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
+                              KC_NO, HOME_A, KC_R, KC_S, KC_T, KC_G,                 KC_M, KC_N, KC_E, KC_I, HOME_O, KC_NO,
                               //-------------------------------------------------//-----------------------------------------------------------//
-                              KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                  KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+                              TG(7), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                               //-------------------------------------------------//-----------------------------------------------------------//
                               //-------------------------------------------------//-----------------------------------------------------------//
-                              LT(1, KC_ESC), LT(2, KC_SPC), LT(3, KC_TAB),          LT(4, KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL), 
+                              LT(1, KC_ESC), LT(2, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL), 
                               //-------------------------------------------------//-----------------------------------------------------------//
-                              QK_CAPS_WORD_TOGGLE, TG(7),                           KC_NO, KC_NO),
+                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
  
      // 1 - Media layer
      [1] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,    KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
+                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO,                                 KC_MSTP, KC_MPLY, KC_MUTE, 
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                    KC_LALT, KC_RCTL),
  
      // 2 - Nav layer
      [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_F13, KC_F16, KC_F17, KC_F18, KC_F19, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, LGUI(KC_GRV), LGUI(S(KC_TAB)), KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,    KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_NO,
+                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO,                                 KC_ENT, KC_BSPC, KC_DEL,  
+                             KC_NO, KC_NO, KC_NO,                                 LGUI_T(KC_ENT), KC_BSPC, KC_DEL,  
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                    KC_LALT, KC_RCTL),
  
      // 3 - Mouse layer
      [3] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,    KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_NO,
+                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO,                                 KC_BTN2, KC_BTN1, KC_BTN3,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                    KC_LALT, KC_RCTL),
  
      // 4 - ?
      [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
@@ -107,9 +104,9 @@
                              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_ESC, KC_SPC, KC_TAB,                              KC_NO, KC_NO, KC_NO, 
+                             KC_ESC, KC_SPC, LGUI_T(KC_TAB),                       KC_NO, KC_NO, KC_NO, 
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                          KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
      // 5 - Symbol layer
      [5] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
@@ -120,26 +117,26 @@
                              KC_NO, KC_CIRC, KC_SLSH, KC_ASTR, KC_BSLS, KC_NO,      EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_ESC, KC_SPC, KC_TAB,                                KC_NO, KC_NO, KC_NO, 
+                             KC_ESC, KC_SPC, LGUI_T(KC_TAB),                       KC_NO, KC_NO, KC_NO, 
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                            KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
  
      // 6 - Function layer
      [6] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_F7, KC_F8, KC_F9, KC_F12, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,            KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
+                             KC_NO, KC_F4, KC_F5, KC_F6, KC_F11, KC_NO,             KC_NO, KC_RSFT, KC_RGUI, KC_RALT, KC_RCTL, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_F1, KC_F2, KC_F3, KC_F10, KC_NO,          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_F1, KC_F2, KC_F3, KC_F10, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_ESC, KC_SPC, KC_TAB,                                KC_NO, KC_NO, KC_NO, 
+                             KC_ESC, KC_SPC, LGUI_T(KC_TAB),                        KC_NO, KC_NO, KC_NO, 
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                            KC_NO, KC_NO),
+                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
  
      // 7 - One Handed layer (for mouse use)
-     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)),                     TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)),TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,  TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
@@ -150,7 +147,7 @@
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_BSPC, KC_SPC, KC_ENT,                                       TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
-                             QK_CAPS_WORD_TOGGLE, KC_NO,                                    TG(7), TG(7)),
+                             KC_LCTL, KC_LALT,                                              TG(7), TG(7)),
  };
 
 // Define combos for bootloader and EEPROM reset
@@ -163,7 +160,7 @@ enum combo_events {
 
 const uint16_t PROGMEM bootloader_combo[] = {BOOT_L, BOOT_R, COMBO_END};
 const uint16_t PROGMEM ee_reset_combo[] = {EE_RST_L, EE_RST_R, COMBO_END};
-const uint16_t PROGMEM capsword_combo[] = {HOME_T, HOME_N, COMBO_END};
+const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
 
 combo_t key_combos[] = {
   [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
@@ -205,4 +202,3 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
- 
