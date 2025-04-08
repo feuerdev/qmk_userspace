@@ -17,6 +17,7 @@
  #include QMK_KEYBOARD_H
  #include "features/achordion.h"
  #include "features/custom_shift_keys.h"
+ #include "features/swapper.h"
 
  // Homerow mods definitions for CAGS (Ctrl, Alt, GUI, Shift)
  #define HOME_A LSFT_T(KC_A)
@@ -31,6 +32,7 @@
      EE_RST_L,
      EE_RST_R,
      EMAIL,
+     SW_WIN,
  };
 
  // LGUI(KC_GRV) - Switch windows of current application
@@ -73,7 +75,7 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, SW_WIN, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, KC_NO,                                 LGUI_T(KC_ENT), KC_BSPC, KC_DEL,  
@@ -168,10 +170,16 @@ combo_t key_combos[] = {
   [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
 };
 
+bool sw_win_active = false;
+
 // Handle the custom keycodes (they do nothing on their own)
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // if (!process_achordion(keycode, record)) { return false; }
     if (!process_custom_shift_keys(keycode, record)) { return false; }
+    update_swapper(
+        &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
+        keycode, record
+    );
 
     switch (keycode) {
         case BOOT_L:
