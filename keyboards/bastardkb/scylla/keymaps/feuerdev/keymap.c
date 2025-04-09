@@ -21,11 +21,15 @@
 #include "features/achordion.h"
 #endif
 
-// Homerow shift mods
-#define HOME_A LSFT_T(KC_A)
-#define HOME_O RSFT_T(KC_O)
+enum layers {
+    ALPHA,
+    MEDIA,
+    NAV,
+    SYMBOL,
+    FUNCTION,
+    MOUSE
+};
 
-// Define custom keycodes
 enum custom_keycodes {
     BOOT_L = SAFE_RANGE,
     BOOT_R,
@@ -35,24 +39,25 @@ enum custom_keycodes {
     SW_WIN,
 };
 
+#define HOME_A LSFT_T(KC_A)
+#define HOME_O RSFT_T(KC_O)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    // 0 - Alpha layer
-    [0] = LAYOUT_split_4x6_5(BOOT_L, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
+    [ALPHA] = LAYOUT_split_4x6_5(BOOT_L, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              EE_RST_L, KC_Q, KC_W, KC_F, KC_P, KC_B,                KC_J, KC_L, KC_U, KC_Y, KC_MINS, EE_RST_R,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, HOME_A, KC_R, KC_S, KC_T, KC_G,                 KC_M, KC_N, KC_E, KC_I, HOME_O, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             TG(5), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+                             TG(MOUSE), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             LT(1, KC_ESC), LT(2, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(3, KC_BSPC), LT(4, KC_DEL), 
+                             LT(MEDIA, KC_ESC), LT(NAV, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(SYMBOL, KC_BSPC), LT(FUNCTION, KC_DEL), 
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
 
-    // 1 - Media layer
-    [1] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [MEDIA] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
@@ -65,8 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                    KC_LALT, KC_RCTL),
 
-    // 2 - Nav layer
-    [2] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                       KC_F13, KC_F16, KC_F17, KC_F18, KC_F19, KC_NO,
+    [NAV] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                       KC_F13, KC_F16, KC_F17, KC_F18, KC_F19, KC_NO,
                             //---------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                        KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
                             //---------------------------------------------------------//-----------------------------------------------------------//
@@ -79,8 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //---------------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                                KC_LALT, KC_RCTL),
 
-    // 3 - Symbol layer
-    [3] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
+    [SYMBOL] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                             //-------------------------------------------------//--------------------------------------------------------------//
                             KC_NO, KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_NO,      KC_AMPR, KC_GRV, KC_LBRC, KC_RBRC, KC_PERC, KC_NO,
                             //-------------------------------------------------//--------------------------------------------------------------//
@@ -93,8 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
 
-    // 4 - Function layer
-    [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [FUNCTION] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_F7, KC_F8, KC_F9, KC_F12, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
@@ -107,19 +109,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
 
-    // 5 - One Handed layer (for mouse use)
-    [5] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,         TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_BSPC, KC_SPC, LGUI_T(KC_TAB),                                 TG(5), TG(5), TG(5),
-                            //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_LCTL, KC_LALT,                                                TG(5), TG(5)),
+    [MOUSE] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,         TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             KC_BSPC, KC_SPC, LGUI_T(KC_TAB),                                 TG(MOUSE), TG(MOUSE), TG(MOUSE),
+                             //------------------------------------------------------------//-----------------------------------------------------------//
+                             KC_LCTL, KC_LALT,                                                TG(MOUSE), TG(MOUSE)),
 };
 
 // Define combos for bootloader and EEPROM reset
@@ -139,6 +140,15 @@ combo_t key_combos[] = {
  [COMBO_EE_RESET] = COMBO(ee_reset_combo, QK_CLEAR_EEPROM),
  [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
 };
+
+const custom_shift_key_t custom_shift_keys[] = {
+ {KC_COMM, KC_EXLM}, // Shift , is !
+ {KC_DOT , KC_QUES}, // Shift . is ?
+ {KC_SLSH, KC_BSLS}  // Shift forward slash is backslash
+};
+
+uint8_t NUM_CUSTOM_SHIFT_KEYS =
+    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 bool sw_win_active = false;
 
@@ -175,11 +185,3 @@ void housekeeping_task_user(void) {
 #endif
 }
 
-const custom_shift_key_t custom_shift_keys[] = {
- {KC_COMM, KC_EXLM}, // Shift , is !
- {KC_DOT , KC_QUES}, // Shift . is ?
- {KC_SLSH, KC_BSLS}  // Shift forward slash is backslash
-};
-
-uint8_t NUM_CUSTOM_SHIFT_KEYS =
-    sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
