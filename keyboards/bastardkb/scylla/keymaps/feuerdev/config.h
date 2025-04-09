@@ -21,3 +21,4 @@
   #define QUICK_TAP_TERM 0
   #define PERMISSIVE_HOLD
   #define COMBO_TERM 50
+  // #define ENABLE_ACHORDION
