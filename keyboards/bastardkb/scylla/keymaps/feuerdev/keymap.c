@@ -19,10 +19,8 @@
  #include "features/custom_shift_keys.h"
  #include "features/swapper.h"
 
- // Homerow mods definitions for CAGS (Ctrl, Alt, GUI, Shift)
+ // Homerow shift mods
  #define HOME_A LSFT_T(KC_A)
- 
- // Reversed order on the right hand to mirror left hand (SGAC)
  #define HOME_O RSFT_T(KC_O)
  
  // Define custom keycodes
@@ -79,35 +77,8 @@
                              //---------------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                                KC_LALT, KC_RCTL),
  
-     // 3 - Mouse layer
-     [3] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO,                                 KC_BTN2, KC_BTN1, KC_BTN3,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_LCTL, KC_LALT,                                    KC_LALT, KC_RCTL),
- 
-     // 4 - ?
-     [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_ESC, KC_SPC, LGUI_T(KC_TAB),                        KC_NO, KC_NO, KC_NO, 
-                             //-------------------------------------------------//-----------------------------------------------------------//
-                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
-     // 5 - Symbol layer
-     [5] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
+     // 3 - Symbol layer
+     [3] = LAYOUT_split_4x6_5(KC_NO, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
                              KC_NO, KC_QUOT, KC_LABK, KC_RABK, KC_DQUO, KC_NO,      KC_AMPR, KC_GRV, KC_LBRC, KC_RBRC, KC_PERC, KC_NO,
                              //-------------------------------------------------//--------------------------------------------------------------//
@@ -120,8 +91,8 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
  
-     // 6 - Function layer
-     [6] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+     // 4 - Function layer
+     [4] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_F7, KC_F8, KC_F9, KC_F12, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
@@ -134,8 +105,8 @@
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
  
-     // 7 - One Handed layer (for mouse use)
-     [7] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+     // 5 - One Handed layer (for mouse use)
+     [5] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
                              //------------------------------------------------------------//-----------------------------------------------------------//
@@ -169,7 +140,6 @@ combo_t key_combos[] = {
 
 bool sw_win_active = false;
 
-// Handle the custom keycodes (they do nothing on their own)
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // if (!process_achordion(keycode, record)) { return false; }
     if (!process_custom_shift_keys(keycode, record)) { return false; }

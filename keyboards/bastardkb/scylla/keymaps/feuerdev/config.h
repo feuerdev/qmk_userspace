@@ -16,9 +16,8 @@
   */
   #pragma once
  
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 8
+  #define DYNAMIC_KEYMAP_LAYER_COUNT 6
   #define TAPPING_TERM 250
   #define QUICK_TAP_TERM 0
   #define PERMISSIVE_HOLD
-  // #define CHORDAL_HOLD
   #define COMBO_TERM 50
