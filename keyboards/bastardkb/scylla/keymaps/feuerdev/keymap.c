@@ -44,10 +44,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, HOME_A, KC_R, KC_S, KC_T, KC_G,                 KC_M, KC_N, KC_E, KC_I, HOME_O, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             TG(7), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+                             TG(5), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             LT(1, KC_ESC), LT(2, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(5, KC_BSPC), LT(6, KC_DEL), 
+                             LT(1, KC_ESC), LT(2, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(3, KC_BSPC), LT(4, KC_DEL), 
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
 
@@ -108,18 +108,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_RCTL),
 
     // 5 - One Handed layer (for mouse use)
-    [5] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+    [5] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
                             //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+                            KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
                             //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+                            KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
                             //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,         TG(7), TG(7), TG(7), TG(7), TG(7), TG(7),
+                            KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,         TG(5), TG(5), TG(5), TG(5), TG(5), TG(5),
                             //------------------------------------------------------------//-----------------------------------------------------------//
                             //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_BSPC, KC_SPC, LGUI_T(KC_TAB),                                 TG(7), TG(7), TG(7),
+                            KC_BSPC, KC_SPC, LGUI_T(KC_TAB),                                 TG(5), TG(5), TG(5),
                             //------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_LCTL, KC_LALT,                                                TG(7), TG(7)),
+                            KC_LCTL, KC_LALT,                                                TG(5), TG(5)),
 };
 
 // Define combos for bootloader and EEPROM reset
