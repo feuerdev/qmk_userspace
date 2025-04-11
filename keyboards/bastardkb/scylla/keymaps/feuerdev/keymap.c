@@ -23,7 +23,6 @@
 
 enum layers {
     ALPHA,
-    MEDIA,
     NAV,
     SYMBOL,
     FUNCTION
@@ -43,7 +42,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [ALPHA] = LAYOUT_split_4x6_5(BOOT_L, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
+    [ALPHA] = LAYOUT_split_4x6_5(BOOT_L, KC_1, KC_2, KC_3, KC_4, KC_5,              KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              EE_RST_L, KC_Q, KC_W, KC_F, KC_P, KC_B,                KC_J, KC_L, KC_U, KC_Y, KC_MINS, EE_RST_R,
                              //-------------------------------------------------//-----------------------------------------------------------//
@@ -52,22 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             LT(MEDIA, KC_ESC), LT(NAV, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(SYMBOL, KC_BSPC), LT(FUNCTION, KC_DEL), 
+                             LT(FUNCTION, KC_ESC), LT(NAV, KC_SPC), LGUI_T(KC_TAB), LGUI_T(KC_ENT), LT(SYMBOL, KC_BSPC), LT(FUNCTION, KC_DEL), 
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_HYPR),
-
-    [MEDIA] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO, KC_NO,                                 KC_MSTP, KC_MPLY, KC_MUTE, 
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_LCTL, KC_LALT,                                    KC_LALT, KC_HYPR),
 
     [NAV] = LAYOUT_split_4x6_5(KC_NO, HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS),    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
@@ -95,18 +81,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_HYPR),
 
-    [FUNCTION] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [FUNCTION] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                            //----------------------------------------------------//-----------------------------------------------------------//
+                            KC_NO, KC_F12, KC_F7, KC_F8, KC_F9, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                            //----------------------------------------------------//-----------------------------------------------------------//
+                            KC_NO, KC_F11, KC_F4, KC_F5, KC_F6, KC_NO,              KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
+                            //----------------------------------------------------//-----------------------------------------------------------//
+                            KC_NO, KC_F10, KC_F1, KC_F2, KC_F3, KC_NO,              KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_F12, KC_F7, KC_F8, KC_F9, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_F11, KC_F4, KC_F5, KC_F6, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                            KC_ESC, KC_SPC, LGUI_T(KC_TAB),                         KC_MSTP, KC_MPLY, KC_MUTE, 
                             //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_F10, KC_F1, KC_F2, KC_F3, KC_NO,             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_ESC, KC_SPC, LGUI_T(KC_TAB),                        KC_NO, KC_NO, KC_NO, 
-                            //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_LCTL, KC_LALT,                                      KC_LALT, KC_HYPR),
+                            KC_LCTL, KC_LALT,                                       KC_LALT, KC_HYPR),
 };
 
 // Define combos for bootloader and EEPROM reset
