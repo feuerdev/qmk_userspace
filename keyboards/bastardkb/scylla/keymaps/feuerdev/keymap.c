@@ -104,7 +104,7 @@ enum combo_events {
 };
 
 const uint16_t PROGMEM bootloader_combo[] = {KC_ESC, BOOT_R, COMBO_END};
-const uint16_t PROGMEM ee_reset_combo[] = {EE_RST_L, EE_RST_R, COMBO_END};
+const uint16_t PROGMEM ee_reset_combo[] = {KC_TAB, EE_RST_R, COMBO_END};
 const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
 
 combo_t key_combos[] = {
