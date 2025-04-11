@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                       KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------------//-----------------------------------------------------------//
-                             LT(KC_LALT, KC_NO), LGUI_T(KC_SPC), LT(SYMBOL, KC_NO),    LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
+                             KC_LALT, LGUI_T(KC_SPC), LT(SYMBOL, KC_NO), LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                              KC_NO, KC_NO),
 
@@ -57,12 +57,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_TRNS, HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS),     KC_NO, LGUI(KC_GRV), KC_UP, LGUI(KC_LCBR), LGUI(KC_RCBR), KC_NO,
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS),       KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
+                            KC_NO, KC_LSFT, HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS),             KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS), HYPR(KC_TRNS),       KC_NO, SW_WIN, KC_NO, KC_NO, KC_NO, KC_NO,
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            LT(KC_LALT, KC_NO), LGUI_T(KC_SPC), LT(SYMBOL, KC_NO),                                  LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_NO),  
+                            KC_LALT, LGUI_T(KC_SPC), LT(SYMBOL, KC_NO),                                             LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_NO),  
                             //------------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO,                                                                           KC_NO, KC_NO),
 
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_NO, KC_CIRC, KC_SLSH, KC_DQUO, KC_QUOT, LALT_T(KC_U),     EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             //-------------------------------------------------------//-----------------------------------------------------------//
-                            LT(KC_LALT, KC_NO), LGUI_T(KC_SPC), KC_TRNS,                 LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
+                            KC_LALT, LGUI_T(KC_SPC), KC_TRNS,                            LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
                             //-------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO,                                                KC_NO, KC_NO),
 
@@ -88,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_NO, KC_F10, KC_F1, KC_F2, KC_F3, KC_NO,                KC_NO, KC_MPLY, KC_MSTP, KC_MUTE, KC_NO, KC_NO,
                             //----------------------------------------------------//-----------------------------------------------------------//
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            LT(KC_LALT, KC_NO), LGUI_T(KC_SPC), LT(SYMBOL, KC_SPC),    LCTL_T(KC_ENT), LT(NAV, KC_BSPC), KC_TRNS,
+                            KC_LALT, LGUI_T(KC_SPC), LT(SYMBOL, KC_SPC),              LCTL_T(KC_ENT), LT(NAV, KC_BSPC), KC_TRNS,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO,                                              KC_NO, KC_NO),
+                            KC_NO, KC_NO,                                             KC_NO, KC_NO),
 };
 
 // Define combos for bootloader and EEPROM reset
