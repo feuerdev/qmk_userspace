@@ -116,7 +116,8 @@ combo_t key_combos[] = {
 const custom_shift_key_t custom_shift_keys[] = {
  {KC_COMM, KC_EXLM}, // Shift , is !
  {KC_DOT , KC_QUES}, // Shift . is ?
- {KC_SLSH, KC_BSLS}  // Shift forward slash is backslash
+ {KC_SLSH, KC_BSLS}, // Shift forward slash is backslash
+ {KC_BSPC, KC_DEL}   // Shift backspace is delete
 };
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
