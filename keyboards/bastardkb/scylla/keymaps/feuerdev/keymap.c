@@ -29,9 +29,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    BOOT_L = SAFE_RANGE,
-    BOOT_R,
-    EE_RST_L,
+    BOOT_R = SAFE_RANGE,
     EE_RST_R,
     EMAIL,
     SW_WIN,
