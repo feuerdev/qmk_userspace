@@ -57,11 +57,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_LCTL, KC_LALT,                                      KC_LALT, KC_HYPR),
 
-    [MEDIA] = LAYOUT_split_4x6_5(KC_NO, KC_F13, KC_F16, KC_F17, KC_F18, KC_F19,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [MEDIA] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_LSFT, KC_NO, KC_NO, KC_NO, KC_NO,          KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
+                            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------//-----------------------------------------------------------//
