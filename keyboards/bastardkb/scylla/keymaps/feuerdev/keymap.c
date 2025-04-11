@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                       KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------------//-----------------------------------------------------------//
-                             LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),        LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
+                             LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),        LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, KC_NO,                                              KC_NO, KC_NO),
 
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_NO, HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V),               KC_NO, SW_WIN, LGUI(KC_LCBR), LGUI(KC_RCBR), KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),                                   LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_NO),   
+                            LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),                                   LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_DEL),   
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO,                                                                         KC_NO, KC_NO),
 
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_NO, KC_CIRC, KC_SLSH, KC_DQUO, KC_QUOT, LALT_T(KC_U),     EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             //-------------------------------------------------------//-----------------------------------------------------------//
-                            LALT_T(KC_ESC), LGUI_T(KC_SPC), KC_TRNS,                     LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_NO), 
+                            LALT_T(KC_ESC), LGUI_T(KC_SPC), KC_TRNS,                     LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
                             //-------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO,                                                KC_NO, KC_NO),
 
@@ -107,7 +107,6 @@ const custom_shift_key_t custom_shift_keys[] = {
  {KC_COMM, KC_EXLM}, // Shift , is !
  {KC_DOT , KC_QUES}, // Shift . is ?
  {KC_SLSH, KC_BSLS}, // Shift forward slash is backslash
- {KC_BSPC, KC_DEL}   // Shift backspace is delete
 };
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
