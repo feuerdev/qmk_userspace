@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),        LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
                              //-------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO,                                              KC_NO, KC_NO),
+                             KC_HYPR, KC_MEH,                                              KC_NO, KC_NO),
 
     [NAV] = LAYOUT_split_4x6_5(KC_TRNS, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_4), HYPR(KC_5),          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),                                   LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_DEL),   
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO,                                                                         KC_NO, KC_NO),
+                            KC_HYPR, KC_MEH,                                                                         KC_NO, KC_NO),
 
     [SYMBOL] = LAYOUT_split_4x6_5(KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                 KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------------//-----------------------------------------------------------//
                             LALT_T(KC_ESC), LGUI_T(KC_SPC), KC_TRNS,                     LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
                             //-------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO,                                                KC_NO, KC_NO),
+                            KC_HYPR, KC_MEH,                                                KC_NO, KC_NO),
 
     [FUNCTION] = LAYOUT_split_4x6_5(KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, QK_BOOT,
                             //----------------------------------------------------//-----------------------------------------------------------//
@@ -88,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //----------------------------------------------------//-----------------------------------------------------------//
                             LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),       LCTL_T(KC_ENT), LT(NAV, KC_BSPC), KC_TRNS,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, KC_NO,                                             KC_NO, KC_NO),
+                            KC_HYPR, KC_MEH,                                             KC_NO, KC_NO),
 };
 
 // Define combos for bootloader and EEPROM reset
