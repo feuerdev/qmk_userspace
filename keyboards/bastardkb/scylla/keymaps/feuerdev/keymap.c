@@ -29,9 +29,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-    BOOT_R = SAFE_RANGE,
-    EE_RST_R,
-    EMAIL,
+    EMAIL = SAFE_RANGE,
     SW_WIN,
 };
 
@@ -40,9 +38,9 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [ALPHA] = LAYOUT_split_4x6_5(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, BOOT_R,
+    [ALPHA] = LAYOUT_split_4x6_5(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                              //-------------------------------------------------------//-----------------------------------------------------------//
-                             KC_TAB, KC_Q, KC_W, KC_F, KC_P, KC_B,                      KC_J, KC_L, KC_U, KC_Y, KC_MINS, EE_RST_R,
+                             KC_TAB, KC_Q, KC_W, KC_F, KC_P, KC_B,                      KC_J, KC_L, KC_U, KC_Y, KC_MINS, KC_NO,
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, HOME_A, KC_R, KC_S, KC_T, KC_G,                     KC_M, KC_N, KC_E, KC_I, HOME_O, KC_NO,
                              //-------------------------------------------------------//-----------------------------------------------------------//
@@ -79,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_NO,                                                KC_NO, KC_NO),
 
-    [FUNCTION] = LAYOUT_split_4x6_5(KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [FUNCTION] = LAYOUT_split_4x6_5(KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, QK_BOOT,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_F12, KC_F7, KC_F8, KC_F9, KC_NO,              KC_NO, KC_NO, KC_VOLU, KC_NO, KC_NO, KC_NO,
+                            KC_TRNS, KC_F12, KC_F7, KC_F8, KC_F9, KC_NO,              KC_NO, KC_NO, KC_VOLU, KC_NO, KC_NO, QK_CLEAR_EEPROM,
                             //----------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_F11, KC_F4, KC_F5, KC_F6, KC_NO,                KC_NO, KC_MPRV, KC_VOLD, KC_MNXT, KC_NO, KC_NO,
                             //----------------------------------------------------//-----------------------------------------------------------//
@@ -95,19 +93,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Define combos for bootloader and EEPROM reset
 enum combo_events {
- COMBO_BOOTLOADER,
- COMBO_EE_RESET,
  COMBO_CAPSWORD,
  COMBO_COUNT
 };
 
-const uint16_t PROGMEM bootloader_combo[] = {KC_ESC, BOOT_R, COMBO_END};
-const uint16_t PROGMEM ee_reset_combo[] = {KC_TAB, EE_RST_R, COMBO_END};
 const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
 
 combo_t key_combos[] = {
- [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
- [COMBO_EE_RESET] = COMBO(ee_reset_combo, QK_CLEAR_EEPROM),
  [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
 };
 
@@ -128,16 +120,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) { return false; }
 #endif
     if (!process_custom_shift_keys(keycode, record)) { return false; }
-    update_swapper(
-        &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
-        keycode, record
-    );
+    update_swapper(&sw_win_active, KC_LGUI, KC_TAB, SW_WIN, keycode, record);
 
     switch (keycode) {
-        case BOOT_R:
-        case EE_RST_R:
-            // These keys do nothing on their own
-            return false;
         case EMAIL:
             if (record->event.pressed) {
                 SEND_STRING("jannik@feuer.dev");
