@@ -26,8 +26,7 @@ enum layers {
     MEDIA,
     NAV,
     SYMBOL,
-    FUNCTION,
-    MOUSE
+    FUNCTION
 };
 
 enum custom_keycodes {
@@ -50,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------//-----------------------------------------------------------//
                              KC_NO, HOME_A, KC_R, KC_S, KC_T, KC_G,                 KC_M, KC_N, KC_E, KC_I, HOME_O, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
-                             TG(MOUSE), KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
+                             KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,                   KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
                              //-------------------------------------------------//-----------------------------------------------------------//
                              //-------------------------------------------------//-----------------------------------------------------------//
                              LT(MEDIA, KC_ESC), LT(NAV, KC_SPC), LGUI_T(KC_TAB),          LGUI_T(KC_ENT), LT(SYMBOL, KC_BSPC), LT(FUNCTION, KC_DEL), 
@@ -108,19 +107,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_ESC, KC_SPC, LGUI_T(KC_TAB),                        KC_NO, KC_NO, KC_NO, 
                             //-------------------------------------------------//-----------------------------------------------------------//
                             KC_LCTL, KC_LALT,                                      KC_LALT, KC_HYPR),
-
-    [MOUSE] = LAYOUT_split_4x6_5(KC_NO, KC_NO, KC_NO, KC_NO, LGUI(LSFT(KC_4)), LGUI(LSFT(KC_5)), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, LGUI(KC_A), LGUI(KC_Z), LGUI(LSFT(KC_Z)), KC_NO,   TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_NO,                TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_NO, KC_NO, LGUI(KC_X), LGUI(KC_C), LGUI(KC_V), KC_NO,         TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE), TG(MOUSE),
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_BSPC, KC_SPC, LGUI_T(KC_TAB),                                 TG(MOUSE), TG(MOUSE), TG(MOUSE),
-                             //------------------------------------------------------------//-----------------------------------------------------------//
-                             KC_LCTL, KC_LALT,                                                TG(MOUSE), TG(MOUSE)),
 };
 
 // Define combos for bootloader and EEPROM reset
