@@ -53,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NAV] = LAYOUT_split_4x6_5(KC_TRNS, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_4), HYPR(KC_5),          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P), HYPR(KC_B),             KC_NO, LGUI(KC_GRV), KC_UP, LGUI(KC_LCBR), LGUI(KC_RCBR), KC_NO,
+                            KC_TRNS, HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P), HYPR(KC_B),             KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_NO, KC_LSFT, HYPR(KC_R), HYPR(KC_S), HYPR(KC_T), HYPR(KC_G),                   KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_NO, HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V),               KC_NO, SW_WIN, KC_NO, KC_NO, KC_NO, KC_NO,
+                            KC_NO, HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V),               KC_NO, SW_WIN, LGUI(KC_LCBR), LGUI(KC_RCBR), KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             LALT_T(KC_ESC), LGUI_T(KC_SPC), LT(SYMBOL, KC_TAB),                                   LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_NO),   
