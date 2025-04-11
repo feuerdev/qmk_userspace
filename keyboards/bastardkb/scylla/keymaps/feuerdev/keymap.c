@@ -134,9 +134,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     );
 
     switch (keycode) {
-        case BOOT_L:
         case BOOT_R:
-        case EE_RST_L:
         case EE_RST_R:
             // These keys do nothing on their own
             return false;
