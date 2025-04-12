@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             KC_TRNS, KC_TILD, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,           KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_SCLN, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
-                            KC_TRNS, KC_CIRC, KC_SLSH, KC_DQUO, KC_QUOT, LALT_T(KC_U),     EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
+                            KC_TRNS, KC_CIRC, KC_SLSH, KC_DQUO, KC_QUOT, LALT(KC_U),     EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             //-------------------------------------------------------//-----------------------------------------------------------//
                             LALT_T(KC_ESC), KC_TRNS, LGUI_T(KC_TAB),                     LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
