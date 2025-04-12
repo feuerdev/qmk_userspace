@@ -49,20 +49,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              //-------------------------------------------------------//-----------------------------------------------------------//
                              LALT_T(KC_ESC), LT(SYMBOL, KC_SPC), LGUI_T(KC_TAB),        LCTL_T(KC_ENT), LT(NAV, KC_BSPC), LT(FUNCTION, KC_DEL), 
                              //-------------------------------------------------------//-----------------------------------------------------------//
-                             KC_HYPR, KC_MEH,                                           KC_NO, KC_NO),
+                             KC_HYPR, KC_MEH,                                           KC_NO, LGUI(KC_SPC)),
 
-    [NAV] = LAYOUT_split_4x6_5(KC_TRNS, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_4), HYPR(KC_5),          KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+    [NAV] = LAYOUT_split_4x6_5(KC_TRNS, HYPR(KC_1), HYPR(KC_2), HYPR(KC_3), HYPR(KC_4), HYPR(KC_5),            KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P), HYPR(KC_B),             KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
+                            KC_TRNS, HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P), HYPR(KC_B),               KC_NO, LGUI(KC_GRV), KC_UP, KC_NO, KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_TRNS, KC_LSFT, HYPR(KC_R), HYPR(KC_S), HYPR(KC_T), HYPR(KC_G),                  KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_RSFT, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             KC_TRNS, HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V),               KC_NO, SW_WIN, LGUI(KC_LCBR), LGUI(KC_RCBR), KC_NO, KC_NO,
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            LALT_T(KC_ESC), LT(SYMBOL, KC_SPC), LGUI_T(KC_TAB),                              LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_DEL),   
+                            LALT_T(KC_ESC), KC_SPC, LGUI_T(KC_TAB),                                            LCTL_T(KC_ENT), KC_TRNS, LT(FUNCTION, KC_DEL),   
                             //-------------------------------------------------------------------------------//-----------------------------------------------------------//
-                            KC_HYPR, KC_MEH,                                                                 KC_NO, KC_NO),
+                            LGUI(KC_SPC), KC_MEH,                                                              KC_NO, LGUI(KC_SPC)),
 
     [SYMBOL] = LAYOUT_split_4x6_5(KC_TRNS, KC_1, KC_2, KC_3, KC_4, KC_5,                 KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
