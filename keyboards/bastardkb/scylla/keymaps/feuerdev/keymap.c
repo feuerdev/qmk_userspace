@@ -76,27 +76,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             KC_TRNS, KC_BSLS, KC_LABK, KC_RABK, KC_ASTR, KC_NO,          KC_AMPR, KC_GRV, KC_LBRC, KC_RBRC, KC_PERC, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
-                            KC_TRNS, KC_TILD, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,           KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_SCLN, KC_NO,
+                            KC_TRNS, KC_TILD, KC_MINS, KC_PLUS, KC_EQL, KC_HASH,         KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_SCLN, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             KC_TRNS, KC_CIRC, KC_SLSH, KC_DQUO, KC_QUOT, LALT(KC_U),     EMAIL, KC_DLR, KC_LCBR, KC_RCBR, KC_AT, KC_NO,
                             //-------------------------------------------------------//--------------------------------------------------------------//
                             //-------------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_TRNS, KC_TRNS,                                      KC_TRNS, KC_TRNS, KC_TRNS, 
+                            KC_TRNS, KC_TRNS, KC_TRNS,                                   KC_TRNS, KC_TRNS, KC_TRNS, 
                             //-------------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_TRNS,                                             KC_TRNS, KC_TRNS),
+                            KC_TRNS, KC_TRNS,                                            KC_TRNS, KC_TRNS),
 
     [FUNCTION] = LAYOUT_split_4x6_5(KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, QK_BOOT,
                             //----------------------------------------------------//-----------------------------------------------------------//
                             KC_TRNS, KC_F12, KC_F7, KC_F8, KC_F9, KC_NO,              KC_NO, KC_NO, KC_VOLU, KC_NO, KC_NO, QK_CLEAR_EEPROM,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_F11, KC_F4, KC_F5, KC_F6, KC_NO,                KC_NO, KC_MPRV, KC_VOLD, KC_MNXT, KC_NO, KC_NO,
+                            KC_TRNS, KC_F11, KC_F4, KC_F5, KC_F6, KC_NO,              KC_NO, KC_MPRV, KC_VOLD, KC_MNXT, KC_NO, KC_NO,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_F10, KC_F1, KC_F2, KC_F3, KC_NO,                KC_NO, KC_MPLY, KC_MSTP, KC_MUTE, KC_NO, KC_NO,
+                            KC_TRNS, KC_F10, KC_F1, KC_F2, KC_F3, KC_NO,              KC_NO, KC_MPLY, KC_MSTP, KC_MUTE, KC_NO, KC_NO,
                             //----------------------------------------------------//-----------------------------------------------------------//
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_TRNS, KC_TRNS,                                  KC_TRNS, KC_TRNS, KC_TRNS,
+                            KC_TRNS, KC_TRNS, KC_TRNS,                                KC_TRNS, KC_TRNS, KC_TRNS,
                             //----------------------------------------------------//-----------------------------------------------------------//
-                            KC_TRNS, KC_TRNS,                                          KC_TRNS, KC_TRNS),
+                            KC_TRNS, KC_TRNS,                                         KC_TRNS, KC_TRNS),
 };
 
 // Define combos for bootloader and EEPROM reset
