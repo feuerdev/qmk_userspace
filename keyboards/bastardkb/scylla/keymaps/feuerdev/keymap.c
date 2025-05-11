@@ -116,6 +116,8 @@ const custom_shift_key_t custom_shift_keys[] = {
  {KC_DOT , KC_QUES}, // Shift . is ?
  {KC_SLSH, KC_BSLS}, // Shift forward slash is backslash
  {KC_COLN, KC_SCLN}, // Shift : is ;
+ {KC_LPRN, KC_LABK}, // Shift ( is <
+ {KC_RPRN, KC_RABK}, // Shift ) is >
 };
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
