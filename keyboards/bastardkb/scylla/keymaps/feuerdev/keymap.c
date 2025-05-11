@@ -44,6 +44,37 @@ enum custom_keycodes {
 #define HOME_O LSFT_T(KC_O)
 
 
+enum combo_events {
+  COMBO_CAPSWORD,
+  COMBO_ESC,
+  COMBO_CTRL_C,
+  COMBO_CUT,
+  COMBO_CUT_ALT,
+  COMBO_COPY,
+  COMBO_PASTE,
+  COMBO_HASH,
+  COMBO_DOLLAR,
+  COMBO_LBRACKET,
+  COMBO_RBRACKET,
+  COMBO_LPAREN,
+  COMBO_RPAREN,
+  COMBO_LBRACE,
+  COMBO_RBRACE,
+  COMBO_EQUAL,
+  COMBO_PLUS,
+  COMBO_MINUS,
+  COMBO_AT,
+  COMBO_PERCENT,
+  COMBO_PIPE,
+  COMBO_TILDE,
+  COMBO_GRAVE,
+  COMBO_STAR,
+  COMBO_CARET,
+  COMBO_AMPS,
+  COMBO_EMAIL_COMBO,
+  COMBO_COUNT
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [ALPHA] = LAYOUT_split_4x6_5(KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5,                  KC_6, KC_7, KC_8, KC_9, KC_0, KC_NO,
@@ -99,16 +130,64 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             KC_TRNS, KC_TRNS,                                         KC_TRNS, KC_TRNS),
 };
 
-// Define combos for bootloader and EEPROM reset
-enum combo_events {
- COMBO_CAPSWORD,
- COMBO_COUNT
-};
-
+// Define key combinations for each combo
 const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM ctrl_c_combo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM cut_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM cut_alt_combo[] = {KC_X, KC_D, COMBO_END};
+const uint16_t PROGMEM copy_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM paste_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM hash_combo[] = {KC_T, KC_G, COMBO_END};
+const uint16_t PROGMEM dollar_combo[] = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM lbracket_combo[] = {KC_L, KC_U, COMBO_END};
+const uint16_t PROGMEM rbracket_combo[] = {KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM lparen_combo[] = {HOME_N, HOME_E, COMBO_END};
+const uint16_t PROGMEM rparen_combo[] = {HOME_E, HOME_I, COMBO_END};
+const uint16_t PROGMEM lbrace_combo[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM rbrace_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM equal_combo[] = {HOME_S, HOME_T, COMBO_END};
+const uint16_t PROGMEM plus_combo[] = {HOME_R, HOME_S, COMBO_END};
+const uint16_t PROGMEM minus_combo[] = {HOME_A, HOME_R, COMBO_END};
+const uint16_t PROGMEM at_combo[] = {KC_M, HOME_N, COMBO_END};
+const uint16_t PROGMEM percent_combo[] = {KC_P, HOME_T, COMBO_END};
+const uint16_t PROGMEM pipe_combo[] = {KC_U, HOME_E, COMBO_END};
+const uint16_t PROGMEM tilde_combo[] = {KC_L, HOME_N, COMBO_END};
+const uint16_t PROGMEM grave_combo[] = {HOME_N, KC_H, COMBO_END};
+const uint16_t PROGMEM star_combo[] = {HOME_S, KC_C, COMBO_END};
+const uint16_t PROGMEM caret_combo[] = {KC_F, HOME_S, COMBO_END};
+const uint16_t PROGMEM amps_combo[] = {HOME_T, KC_D, COMBO_END};
+const uint16_t PROGMEM email_combo[] = {HOME_E, KC_COMM, COMBO_END};
 
+// Map the combos to their respective actions
 combo_t key_combos[] = {
- [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
+  [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
+  [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
+  [COMBO_CTRL_C] = COMBO(ctrl_c_combo, LCTL(KC_C)),
+  [COMBO_CUT] = COMBO(cut_combo, LGUI(KC_X)),
+  [COMBO_CUT_ALT] = COMBO(cut_alt_combo, LGUI(KC_X)),
+  [COMBO_COPY] = COMBO(copy_combo, LGUI(KC_C)),
+  [COMBO_PASTE] = COMBO(paste_combo, LGUI(KC_V)),
+  [COMBO_HASH] = COMBO(hash_combo, KC_HASH),
+  [COMBO_DOLLAR] = COMBO(dollar_combo, KC_DLR),
+  [COMBO_LBRACKET] = COMBO(lbracket_combo, KC_LBRC),
+  [COMBO_RBRACKET] = COMBO(rbracket_combo, KC_RBRC),
+  [COMBO_LPAREN] = COMBO(lparen_combo, KC_LPRN),
+  [COMBO_RPAREN] = COMBO(rparen_combo, KC_RPRN),
+  [COMBO_LBRACE] = COMBO(lbrace_combo, KC_LCBR),
+  [COMBO_RBRACE] = COMBO(rbrace_combo, KC_RCBR),
+  [COMBO_EQUAL] = COMBO(equal_combo, KC_EQL),
+  [COMBO_PLUS] = COMBO(plus_combo, KC_PLUS),
+  [COMBO_MINUS] = COMBO(minus_combo, KC_MINS),
+  [COMBO_AT] = COMBO(at_combo, KC_AT),
+  [COMBO_PERCENT] = COMBO(percent_combo, KC_PERC),
+  [COMBO_PIPE] = COMBO(pipe_combo, KC_PIPE),
+  [COMBO_TILDE] = COMBO(tilde_combo, KC_TILD),
+  [COMBO_GRAVE] = COMBO(grave_combo, KC_GRV),
+  [COMBO_STAR] = COMBO(star_combo, KC_ASTR),
+  [COMBO_CARET] = COMBO(caret_combo, KC_CIRC),
+  [COMBO_AMPS] = COMBO(amps_combo, KC_AMPR),
+  [COMBO_EMAIL_COMBO] = COMBO_ACTION(email_combo),
 };
 
 const custom_shift_key_t custom_shift_keys[] = {
@@ -122,6 +201,17 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
+
+// Process combo events
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+        case COMBO_EMAIL_COMBO:
+            if (pressed) {
+                SEND_STRING("jannik@feuer.dev");
+            }
+            break;
+    }
+}
 
 bool sw_win_active = false;
 
