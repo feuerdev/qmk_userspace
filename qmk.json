@@ -1,6 +1,6 @@
 {
     "userspace_version": "1.0",
     "build_targets": [
-        ["bastardkb/scylla", "feuerdev"]
+        ["bastardkb/dilemma/3x5_3_procyon", "feuerdev"]
     ]
 }
