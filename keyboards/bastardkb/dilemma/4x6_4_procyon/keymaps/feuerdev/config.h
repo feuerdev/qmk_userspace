@@ -12,6 +12,8 @@
 
 #define COMBO_TERM_FAST 24
 #define COMBO_TERM_SLOW 40
+#define COMBO_TERM_TOGGLE 50
+#define COMBO_TERM_BOOT 60
 
 /*
  * USB master detection: this PCB does not match upstream USB_VBUS_PIN GP19.

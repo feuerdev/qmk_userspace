@@ -28,6 +28,9 @@ enum custom_keycodes {
 
 enum combo_events {
     COMBO_TOGGLE_SPEED,
+    COMBO_BOOTLOADER,
+    COMBO_TOGGLE_QWERTZ_ON,
+    COMBO_TOGGLE_QWERTZ_OFF,
     COMBO_CAPSWORD,
     COMBO_ESC,
     COMBO_CTRL_C,
@@ -195,6 +198,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 const uint16_t PROGMEM speed_combo[] = {KC_Z, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM bootloader_combo[] = {KC_COLN, KC_QUOT, COMBO_END};
+const uint16_t PROGMEM qwertz_on_combo[] = {NUM_Q, NUM_MINS, COMBO_END};
+const uint16_t PROGMEM qwertz_off_combo[] = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
 const uint16_t PROGMEM esc_combo[] = {NUM_W, NUM_F, COMBO_END};
 const uint16_t PROGMEM ctrl_c_combo[] = {NUM_Q, NUM_W, COMBO_END};
@@ -228,6 +234,9 @@ const uint16_t PROGMEM plus_comma_c_combo[] = {KC_COMM, KC_C, COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_TOGGLE_SPEED] = COMBO(speed_combo, TG(SPEED)),
+    [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
+    [COMBO_TOGGLE_QWERTZ_ON] = COMBO(qwertz_on_combo, TG(QWERTZ)),
+    [COMBO_TOGGLE_QWERTZ_OFF] = COMBO(qwertz_off_combo, TG(QWERTZ)),
     [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
     [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
     [COMBO_CTRL_C] = COMBO(ctrl_c_combo, LCTL(KC_C)),
@@ -282,6 +291,12 @@ static top_num_key_t *find_top_num_key(uint16_t keycode) {
 
 uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
+        case COMBO_BOOTLOADER:
+            return COMBO_TERM_BOOT;
+        case COMBO_TOGGLE_SPEED:
+        case COMBO_TOGGLE_QWERTZ_ON:
+        case COMBO_TOGGLE_QWERTZ_OFF:
+            return COMBO_TERM_TOGGLE;
         case COMBO_ESC:
         case COMBO_GRAVE:
         case COMBO_STAR:
