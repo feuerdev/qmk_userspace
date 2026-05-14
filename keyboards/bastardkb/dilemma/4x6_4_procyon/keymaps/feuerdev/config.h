@@ -7,7 +7,11 @@
 #define CHORDAL_HOLD
 #define SPECULATIVE_HOLD
 #define COMBO_TERM 50
+#define COMBO_TERM_PER_COMBO
 #define COMBO_SHOULD_TRIGGER
+
+#define COMBO_TERM_FAST 24
+#define COMBO_TERM_SLOW 40
 
 /*
  * USB master detection: this PCB does not match upstream USB_VBUS_PIN GP19.

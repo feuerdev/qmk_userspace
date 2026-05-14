@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "features/custom_shift_keys.h"
 #include "split_util.h"
 
 enum layers {
@@ -21,11 +22,42 @@ enum custom_keycodes {
     NUM_U,
     NUM_Y,
     NUM_MINS,
+    EMAIL,
     ENT_OR_BOOT,
 };
 
 enum combo_events {
     COMBO_TOGGLE_SPEED,
+    COMBO_CAPSWORD,
+    COMBO_ESC,
+    COMBO_CTRL_C,
+    COMBO_CUT,
+    COMBO_CUT_ALT,
+    COMBO_COPY,
+    COMBO_PASTE,
+    COMBO_HASH,
+    COMBO_DOLLAR,
+    COMBO_LBRACKET,
+    COMBO_RBRACKET,
+    COMBO_LPAREN,
+    COMBO_RPAREN,
+    COMBO_LBRACE,
+    COMBO_RBRACE,
+    COMBO_EQUAL,
+    COMBO_PLUS,
+    COMBO_AT,
+    COMBO_PERCENT,
+    COMBO_PIPE,
+    COMBO_TILDE,
+    COMBO_GRAVE,
+    COMBO_STAR,
+    COMBO_CARET,
+    COMBO_AMPS,
+    COMBO_EMAIL,
+    COMBO_AMPERSAND,
+    COMBO_GRAVE_DH,
+    COMBO_STAR_FU,
+    COMBO_PLUS_COMMA_C,
     COMBO_COUNT,
 };
 
@@ -163,10 +195,81 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 const uint16_t PROGMEM speed_combo[] = {KC_Z, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {NUM_W, NUM_F, COMBO_END};
+const uint16_t PROGMEM ctrl_c_combo[] = {NUM_Q, NUM_W, COMBO_END};
+const uint16_t PROGMEM cut_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM cut_alt_combo[] = {KC_X, KC_D, COMBO_END};
+const uint16_t PROGMEM copy_combo[] = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM paste_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM hash_combo[] = {HOME_T, KC_G, COMBO_END};
+const uint16_t PROGMEM dollar_combo[] = {NUM_F, NUM_P, COMBO_END};
+const uint16_t PROGMEM lbracket_combo[] = {NUM_L, NUM_U, COMBO_END};
+const uint16_t PROGMEM rbracket_combo[] = {NUM_U, NUM_Y, COMBO_END};
+const uint16_t PROGMEM lparen_combo[] = {HOME_N, HOME_E, COMBO_END};
+const uint16_t PROGMEM rparen_combo[] = {HOME_E, HOME_I, COMBO_END};
+const uint16_t PROGMEM lbrace_combo[] = {KC_H, KC_COMM, COMBO_END};
+const uint16_t PROGMEM rbrace_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM equal_combo[] = {HOME_S, HOME_T, COMBO_END};
+const uint16_t PROGMEM plus_combo[] = {HOME_R, HOME_S, COMBO_END};
+const uint16_t PROGMEM at_combo[] = {KC_M, HOME_N, COMBO_END};
+const uint16_t PROGMEM percent_combo[] = {NUM_P, HOME_T, COMBO_END};
+const uint16_t PROGMEM pipe_combo[] = {NUM_U, HOME_E, COMBO_END};
+const uint16_t PROGMEM tilde_combo[] = {NUM_L, HOME_N, COMBO_END};
+const uint16_t PROGMEM grave_combo[] = {HOME_N, KC_H, COMBO_END};
+const uint16_t PROGMEM star_combo[] = {HOME_S, KC_C, COMBO_END};
+const uint16_t PROGMEM caret_combo[] = {NUM_F, HOME_S, COMBO_END};
+const uint16_t PROGMEM amps_combo[] = {HOME_T, KC_D, COMBO_END};
+const uint16_t PROGMEM email_combo[] = {KC_G, KC_M, COMBO_END};
+const uint16_t PROGMEM ampersand_combo[] = {NUM_P, NUM_L, COMBO_END};
+const uint16_t PROGMEM grave_dh_combo[] = {KC_D, KC_H, COMBO_END};
+const uint16_t PROGMEM star_fu_combo[] = {NUM_F, NUM_U, COMBO_END};
+const uint16_t PROGMEM plus_comma_c_combo[] = {KC_COMM, KC_C, COMBO_END};
 
 combo_t key_combos[] = {
     [COMBO_TOGGLE_SPEED] = COMBO(speed_combo, TG(SPEED)),
+    [COMBO_CAPSWORD] = COMBO(capsword_combo, QK_CAPS_WORD_TOGGLE),
+    [COMBO_ESC] = COMBO(esc_combo, KC_ESC),
+    [COMBO_CTRL_C] = COMBO(ctrl_c_combo, LCTL(KC_C)),
+    [COMBO_CUT] = COMBO(cut_combo, LGUI(KC_X)),
+    [COMBO_CUT_ALT] = COMBO(cut_alt_combo, LGUI(KC_X)),
+    [COMBO_COPY] = COMBO(copy_combo, LGUI(KC_C)),
+    [COMBO_PASTE] = COMBO(paste_combo, LGUI(KC_V)),
+    [COMBO_HASH] = COMBO(hash_combo, KC_HASH),
+    [COMBO_DOLLAR] = COMBO(dollar_combo, KC_DLR),
+    [COMBO_LBRACKET] = COMBO(lbracket_combo, KC_LBRC),
+    [COMBO_RBRACKET] = COMBO(rbracket_combo, KC_RBRC),
+    [COMBO_LPAREN] = COMBO(lparen_combo, KC_LPRN),
+    [COMBO_RPAREN] = COMBO(rparen_combo, KC_RPRN),
+    [COMBO_LBRACE] = COMBO(lbrace_combo, KC_LCBR),
+    [COMBO_RBRACE] = COMBO(rbrace_combo, KC_RCBR),
+    [COMBO_EQUAL] = COMBO(equal_combo, KC_EQL),
+    [COMBO_PLUS] = COMBO(plus_combo, KC_PLUS),
+    [COMBO_AT] = COMBO(at_combo, KC_AT),
+    [COMBO_PERCENT] = COMBO(percent_combo, KC_PERC),
+    [COMBO_PIPE] = COMBO(pipe_combo, KC_PIPE),
+    [COMBO_TILDE] = COMBO(tilde_combo, KC_TILD),
+    [COMBO_GRAVE] = COMBO(grave_combo, KC_GRV),
+    [COMBO_STAR] = COMBO(star_combo, KC_ASTR),
+    [COMBO_CARET] = COMBO(caret_combo, KC_CIRC),
+    [COMBO_AMPS] = COMBO(amps_combo, KC_AMPR),
+    [COMBO_EMAIL] = COMBO(email_combo, EMAIL),
+    [COMBO_AMPERSAND] = COMBO(ampersand_combo, KC_AMPR),
+    [COMBO_GRAVE_DH] = COMBO(grave_dh_combo, KC_GRV),
+    [COMBO_STAR_FU] = COMBO(star_fu_combo, KC_ASTR),
+    [COMBO_PLUS_COMMA_C] = COMBO(plus_comma_c_combo, KC_PLUS),
 };
+
+const custom_shift_key_t custom_shift_keys[] = {
+    {KC_COMM, KC_EXLM},
+    {KC_DOT,  KC_QUES},
+    {KC_SLSH, KC_BSLS},
+    {KC_COLN, KC_SCLN},
+    {KC_LPRN, KC_LABK},
+    {KC_RPRN, KC_RABK},
+};
+
+uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 static top_num_key_t *find_top_num_key(uint16_t keycode) {
     for (uint8_t i = 0; i < ARRAY_SIZE(top_num_keys); i++) {
@@ -175,6 +278,23 @@ static top_num_key_t *find_top_num_key(uint16_t keycode) {
         }
     }
     return NULL;
+}
+
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
+    switch (combo_index) {
+        case COMBO_ESC:
+        case COMBO_GRAVE:
+        case COMBO_STAR:
+        case COMBO_CARET:
+        case COMBO_AMPS:
+        case COMBO_AMPERSAND:
+        case COMBO_GRAVE_DH:
+        case COMBO_STAR_FU:
+        case COMBO_PLUS_COMMA_C:
+            return COMBO_TERM_SLOW;
+        default:
+            return COMBO_TERM_FAST;
+    }
 }
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
@@ -191,6 +311,10 @@ char chordal_hold_handedness(keypos_t key) {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (ent_or_boot_pressed && record->event.pressed && keycode != ENT_OR_BOOT) {
         ent_or_boot_interrupted = true;
+    }
+
+    if (!process_custom_shift_keys(keycode, record)) {
+        return false;
     }
 
     top_num_key_t *top_num_key = find_top_num_key(keycode);
@@ -226,6 +350,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             ent_or_boot_pressed = false;
+        }
+        return false;
+    }
+
+    if (keycode == EMAIL) {
+        if (record->event.pressed) {
+            SEND_STRING("jannik@feuer.dev");
         }
         return false;
     }
