@@ -138,14 +138,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [FUNC] = {
         // LEFT
         /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 1 top     */ { XXXXX,   KC_F12,  KC_F7,   KC_F8,        KC_F9,           XXXXX        },
-        /* row 2 middle  */ { XXXXX,   KC_F11,  KC_F4,   KC_F5,        KC_F6,           XXXXX        },
-        /* row 3 bottom  */ { QK_BOOT, KC_F10,  KC_F1,   KC_F2,        KC_F3,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   KC_F12,  KC_F7,   KC_F8,        KC_F9,           DPI_MOD      },
+        /* row 2 middle  */ { XXXXX,   KC_F11,  KC_F4,   KC_F5,        KC_F6,           DPI_RMOD     },
+        /* row 3 bottom  */ { QK_BOOT, KC_F10,  KC_F1,   KC_F2,        KC_F3,           DRG_TOG      },
         /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
         // RIGHT
         /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 6 top     */ { XXXXX,   XXXXX,   XXXXX,   KC_VOLU,      XXXXX,           XXXXX        },
-        /* row 7 middle  */ { XXXXX,   XXXXX,   KC_MNXT, KC_VOLD,      KC_MPRV,         XXXXX        },
+        /* row 6 top     */ { XXXXX,   XXXXX,   S_D_MOD, KC_VOLU,      XXXXX,           XXXXX        },
+        /* row 7 middle  */ { XXXXX,   SNP_TOG, KC_MNXT, KC_VOLD,      KC_MPRV,         S_D_RMOD     },
         /* row 8 bottom  */ { QK_BOOT, XXXXX,   KC_MUTE, KC_MSTP,      KC_MPLY,         XXXXX        },
         /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
     },
