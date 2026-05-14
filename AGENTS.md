@@ -67,11 +67,24 @@ Main notes:
 docs/dilemma-procyon-notes.md
 ```
 
+Keymap reference:
+
+```text
+docs/dilemma-keymap.md
+```
+
 Working keymap:
 
 ```text
 keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/feuerdev
 ```
+
+When changing the Dilemma `feuerdev` keymap or config, keep
+`docs/dilemma-keymap.md` in sync in the same change. This includes layer
+contents, combos, tap-hold timing, encoder behavior, pointer controls, split
+settings, and enabled QMK features. If the change is hardware-investigation
+related, also update `docs/dilemma-procyon-notes.md` when it changes what we
+know about the board.
 
 Diagnostic keymaps kept for future hardware debugging:
 
@@ -137,4 +150,3 @@ Hold the lower underside BOOT/BOOTSEL button while plugging in USB.
   untracked files inside QMK submodules, not userspace changes.
 - Keep unrelated keyboard folders unless there is a clear reason to remove
   them. `qmk.json` determines what actually builds.
-
