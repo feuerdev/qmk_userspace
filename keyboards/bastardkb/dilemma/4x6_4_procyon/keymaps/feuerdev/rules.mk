@@ -3,5 +3,7 @@
 # using an interrupt. If touch produces cursor movement, the I2C wiring
 # matches upstream; if not, we will need an I2C probe.
 POINTING_DEVICE_ENABLE = yes
+CAPS_WORD_ENABLE = yes
+COMBO_ENABLE = yes
 
 MAXTOUCH_DEBUG = no

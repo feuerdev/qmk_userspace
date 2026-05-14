@@ -1,112 +1,245 @@
 #include QMK_KEYBOARD_H
 #include "split_util.h"
 
-/*
- * Testing keymap.
- *
- * Alpha order ported from the personal Totem ZMK config (base_layer in
- * ../zmk-config-totem/config/totem.keymap). No home-row mods, combos,
- * hold-taps, or symbol layers yet -- just plain alphas to validate that
- * every key on both halves routes to the expected character.
- *
- * We bypass the LAYOUT macro and address the matrix directly so the
- * innermost thumb on each half (matrix[4][5] and matrix[9][5], which
- * upstream's LAYOUT does not expose) becomes addressable.
- *
- * Split matrix layout (MATRIX_ROWS = 10, MATRIX_COLS = 6):
- *   rows 0..4 = LEFT  (phantom, top, middle, bottom, thumb)
- *   rows 5..9 = RIGHT (phantom, top, middle, bottom, thumb)
- *   col 0     = outer pinky on both halves (mirrored)
- *   col 5     = inner index on both halves
- *
- * The clone only has 3 alpha rows + 3 thumbs per side, so:
- *   - rows 0 and 5 are the phantom row (no switches)
- *   - thumbs occupy cols 3 (outer), 4 (middle), 5 (inner); cols 0-2 of
- *     the thumb row are empty.
- *
- * Totem alpha layer (5 cols per side; we have 6, so col 0 on each side
- * is an extra outer key not present on Totem):
- *
- *   Q  W  F  P  B  |  J  L  U  Y  -
- *   A  R  S  T  G  |  M  N  E  I  O
- *   Z  X  C  D  V  |  K  H  ,  .  /
- *
- * Outer extra columns (0) get practical defaults so the keymap is
- * usable for testing without modifying upstream.
- *
- * Thumbs (Totem-flavored):
- *   left  outer->inner = LGUI, SPC,  TAB
- *   right inner->outer = ENT,  BSPC, DEL
- */
-
 enum layers {
-    LAYER_BASE = 0,
+    BASE = 0,
+    NAV,
+    FUNC,
+    NUM,
+    QWERTZ,
+    SPEED,
 };
 
 enum custom_keycodes {
-    ENT_OR_BOOT = SAFE_RANGE,
+    NUM_Q = SAFE_RANGE,
+    NUM_W,
+    NUM_F,
+    NUM_P,
+    NUM_B,
+    NUM_J,
+    NUM_L,
+    NUM_U,
+    NUM_Y,
+    NUM_MINS,
+    ENT_OR_BOOT,
+};
+
+enum combo_events {
+    COMBO_TOGGLE_SPEED,
+    COMBO_COUNT,
 };
 
 #define XXXXX KC_NO
+#define TOP_NUM_TERM 300
 
-/*
- * Debug shortcut: bottom outer-pinky on each half flashes the half that
- * currently holds USB, no case disassembly needed. To flash both halves:
- *   1. USB on right, press right bottom outer-pinky -> right in bootloader.
- *   2. Drop UF2, right reboots.
- *   3. Move USB to left, press left bottom outer-pinky -> left in bootloader.
- *   4. Drop UF2, left reboots.
- * QK_BOOT only ever reboots the master (USB-connected) half.
- *
- * MASTER_RIGHT remap: with both halves connected, "right bottom outer-pinky"
- * is matrix[8][0] = QK_BOOT. But when the LEFT half is plugged in solo, it
- * becomes master and uses the _RIGHT pin map, so its physical bottom outer-
- * pinky lands at matrix[9][5] -- which would normally be KC_ENT (right inner
- * thumb). ENT_OR_BOOT below resolves that at press time: it sends KC_ENT
- * when the split transport is up and QK_BOOT when it is not.
- *
- * Side effect: in right-solo mode, the right inner thumb also fires QK_BOOT
- * instead of ENT. Acceptable -- solo mode is for flashing, not typing.
- */
+#define HOME_A LSFT_T(KC_A)
+#define HOME_R LCTL_T(KC_R)
+#define HOME_S LALT_T(KC_S)
+#define HOME_T LGUI_T(KC_T)
+
+#define HOME_N LGUI_T(KC_N)
+#define HOME_E LALT_T(KC_E)
+#define HOME_I LCTL_T(KC_I)
+#define HOME_O LSFT_T(KC_O)
+
+typedef struct {
+    uint16_t keycode;
+    uint16_t tap;
+    uint16_t hold;
+    bool     pressed;
+    bool     held;
+    uint16_t timer;
+} top_num_key_t;
+
+static top_num_key_t top_num_keys[] = {
+    {NUM_Q,    KC_Q,    KC_1, false, false, 0},
+    {NUM_W,    KC_W,    KC_2, false, false, 0},
+    {NUM_F,    KC_F,    KC_3, false, false, 0},
+    {NUM_P,    KC_P,    KC_4, false, false, 0},
+    {NUM_B,    KC_B,    KC_5, false, false, 0},
+    {NUM_J,    KC_J,    KC_6, false, false, 0},
+    {NUM_L,    KC_L,    KC_7, false, false, 0},
+    {NUM_U,    KC_U,    KC_8, false, false, 0},
+    {NUM_Y,    KC_Y,    KC_9, false, false, 0},
+    {NUM_MINS, KC_MINS, KC_0, false, false, 0},
+};
+
+static bool     ent_or_boot_pressed     = false;
+static bool     ent_or_boot_interrupted = false;
+static uint16_t ent_or_boot_timer       = 0;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [LAYER_BASE] = {
+    [BASE] = {
         // LEFT
-        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   },
-        /* row 1 top     */ { KC_ESC,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B    },
-        /* row 2 middle  */ { KC_LSFT, KC_A,    KC_R,    KC_S,    KC_T,    KC_G    },
-        /* row 3 bottom  */ { QK_BOOT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V    },
-        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_LGUI, KC_SPC,  KC_TAB  },
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   NUM_Q,   NUM_W,   NUM_F,        NUM_P,           NUM_B        },
+        /* row 2 middle  */ { XXXXX,   HOME_A,  HOME_R,  HOME_S,       HOME_T,          KC_G         },
+        /* row 3 bottom  */ { KC_COLN, KC_Z,    KC_X,    KC_C,         KC_D,            KC_V         },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_HYPR,      LT(NAV, KC_SPC), KC_TAB       },
         // RIGHT (col 0 = outer pinky, col 5 = inner index)
-        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX,   XXXXX   },
-        /* row 6 top     */ { KC_BSLS, KC_MINS, KC_Y,    KC_U,    KC_L,    KC_J    },
-        /* row 7 middle  */ { KC_QUOT, KC_O,    KC_I,    KC_E,    KC_N,    KC_M    },
-        /* row 8 bottom  */ { QK_BOOT, KC_SLSH, KC_DOT,  KC_COMM, KC_H,    KC_K    },
-        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_DEL,  KC_BSPC, ENT_OR_BOOT },
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   NUM_MINS, NUM_Y,  NUM_U,        NUM_L,           NUM_J        },
+        /* row 7 middle  */ { XXXXX,   HOME_O,  HOME_I,  HOME_E,       HOME_N,          KC_M         },
+        /* row 8 bottom  */ { KC_QUOT, KC_SLSH, KC_DOT,  KC_COMM,      KC_H,            KC_K         },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   LT(FUNC, KC_DEL), LSFT_T(KC_BSPC), ENT_OR_BOOT    },
+    },
+
+    [NAV] = {
+        // LEFT
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P),  HYPR(KC_B)   },
+        /* row 2 middle  */ { XXXXX,   KC_LSFT, KC_LCTL, KC_LALT,      KC_LGUI,         HYPR(KC_G)   },
+        /* row 3 bottom  */ { HYPR(KC_SCLN), HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V) },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
+        // RIGHT
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   XXXXX,   HYPR(KC_Y), KC_UP,     LGUI(KC_GRV),    HYPR(KC_J)   },
+        /* row 7 middle  */ { XXXXX,   HYPR(KC_O), KC_RGHT, KC_DOWN,   KC_LEFT,         HYPR(KC_M)   },
+        /* row 8 bottom  */ { XXXXX,   XXXXX,   LGUI(KC_RBRC), LGUI(KC_LBRC), XXXXX,    XXXXX        },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      LALT(KC_BSPC),   S(KC_ENT)    },
+    },
+
+    [FUNC] = {
+        // LEFT
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   KC_F12,  KC_F7,   KC_F8,        KC_F9,           XXXXX        },
+        /* row 2 middle  */ { XXXXX,   KC_F11,  KC_F4,   KC_F5,        KC_F6,           XXXXX        },
+        /* row 3 bottom  */ { QK_BOOT, KC_F10,  KC_F1,   KC_F2,        KC_F3,           XXXXX        },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
+        // RIGHT
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   XXXXX,   XXXXX,   KC_VOLU,      XXXXX,           XXXXX        },
+        /* row 7 middle  */ { XXXXX,   XXXXX,   KC_MNXT, KC_VOLD,      KC_MPRV,         XXXXX        },
+        /* row 8 bottom  */ { QK_BOOT, XXXXX,   KC_MUTE, KC_MSTP,      KC_MPLY,         XXXXX        },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
+    },
+
+    [NUM] = {
+        // LEFT
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   KC_TRNS, KC_7,    KC_8,         KC_9,            KC_TRNS      },
+        /* row 2 middle  */ { XXXXX,   KC_0,    KC_4,    KC_5,         KC_6,            KC_TRNS      },
+        /* row 3 bottom  */ { XXXXX,   KC_0,    KC_1,    KC_2,         KC_3,            KC_TRNS      },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
+        // RIGHT
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 7 middle  */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 8 bottom  */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
+    },
+
+    [QWERTZ] = {
+        // LEFT
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   KC_Q,    KC_W,    KC_E,         KC_R,            KC_T         },
+        /* row 2 middle  */ { XXXXX,   KC_A,    KC_S,    KC_D,         KC_F,            KC_G         },
+        /* row 3 bottom  */ { KC_LSFT, KC_Z,    KC_X,    KC_C,         KC_V,            KC_B         },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_LCTL,      KC_SPC,          KC_TAB       },
+        // RIGHT
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   KC_P,    KC_O,    KC_I,         KC_U,            KC_Y         },
+        /* row 7 middle  */ { XXXXX,   KC_SCLN, KC_L,    KC_K,         KC_J,            KC_H         },
+        /* row 8 bottom  */ { KC_QUOT, KC_MINS, KC_DOT,  KC_COMM,      KC_M,            KC_N         },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_DEL,       KC_BSPC,         KC_ENT       },
+    },
+
+    [SPEED] = {
+        // LEFT
+        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 1 top     */ { XXXXX,   KC_Q,    KC_W,    KC_F,         KC_P,            KC_B         },
+        /* row 2 middle  */ { XXXXX,   KC_A,    KC_R,    KC_S,         KC_T,            KC_G         },
+        /* row 3 bottom  */ { KC_COLN, KC_Z,    KC_X,    KC_C,         KC_D,            KC_V         },
+        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_HYPR,      KC_SPC,          KC_TAB       },
+        // RIGHT
+        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
+        /* row 6 top     */ { XXXXX,   KC_MINS, KC_Y,    KC_U,         KC_L,            KC_J         },
+        /* row 7 middle  */ { XXXXX,   KC_O,    KC_I,    KC_E,         KC_N,            KC_M         },
+        /* row 8 bottom  */ { KC_QUOT, KC_SLSH, KC_DOT,  KC_COMM,      KC_H,            KC_K         },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_DEL,       KC_BSPC,         KC_ENT       },
     },
 };
 // clang-format on
 
-/*
- * Encoders: index 0 = left, index 1 = right. Both wired to GP14/GP16
- * (see config.h). Bind to volume on the left and page-up/down on the
- * right so each side is distinguishable during testing.
- */
+const uint16_t PROGMEM speed_combo[] = {KC_Z, KC_SLSH, COMBO_END};
+
+combo_t key_combos[] = {
+    [COMBO_TOGGLE_SPEED] = COMBO(speed_combo, TG(SPEED)),
+};
+
+static top_num_key_t *find_top_num_key(uint16_t keycode) {
+    for (uint8_t i = 0; i < ARRAY_SIZE(top_num_keys); i++) {
+        if (top_num_keys[i].keycode == keycode) {
+            return &top_num_keys[i];
+        }
+    }
+    return NULL;
+}
+
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    if (combo_index == COMBO_TOGGLE_SPEED) {
+        return true;
+    }
+    return !layer_state_is(SPEED);
+}
+
+char chordal_hold_handedness(keypos_t key) {
+    return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (ent_or_boot_pressed && record->event.pressed && keycode != ENT_OR_BOOT) {
+        ent_or_boot_interrupted = true;
+    }
+
+    top_num_key_t *top_num_key = find_top_num_key(keycode);
+    if (top_num_key != NULL) {
+        if (record->event.pressed) {
+            top_num_key->pressed = true;
+            top_num_key->held    = false;
+            top_num_key->timer   = timer_read();
+        } else {
+            if (!top_num_key->held) {
+                tap_code16(top_num_key->tap);
+            }
+            top_num_key->pressed = false;
+        }
+        return false;
+    }
+
     if (keycode == ENT_OR_BOOT) {
         if (record->event.pressed) {
             if (is_transport_connected()) {
-                register_code(KC_ENT);
+                ent_or_boot_pressed     = true;
+                ent_or_boot_interrupted = false;
+                ent_or_boot_timer       = timer_read();
+                layer_on(NUM);
             } else {
                 reset_keyboard();
             }
         } else {
-            unregister_code(KC_ENT);
+            if (ent_or_boot_pressed) {
+                layer_off(NUM);
+                if (!ent_or_boot_interrupted && timer_elapsed(ent_or_boot_timer) < TAPPING_TERM) {
+                    tap_code(KC_ENT);
+                }
+            }
+            ent_or_boot_pressed = false;
         }
         return false;
     }
+
     return true;
+}
+
+void matrix_scan_user(void) {
+    for (uint8_t i = 0; i < ARRAY_SIZE(top_num_keys); i++) {
+        if (top_num_keys[i].pressed && !top_num_keys[i].held && timer_elapsed(top_num_keys[i].timer) >= TOP_NUM_TERM) {
+            tap_code16(top_num_keys[i].hold);
+            top_num_keys[i].held = true;
+        }
+    }
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {

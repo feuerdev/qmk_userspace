@@ -1,5 +1,14 @@
 #pragma once
 
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define TAPPING_TERM 250
+#define PERMISSIVE_HOLD
+#define FLOW_TAP_TERM 150
+#define CHORDAL_HOLD
+#define SPECULATIVE_HOLD
+#define COMBO_TERM 50
+#define COMBO_SHOULD_TRIGGER
+
 /*
  * USB master detection: this PCB does not match upstream USB_VBUS_PIN GP19.
  * Use QMK's polled detect with a longer timeout.
