@@ -320,6 +320,9 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 }
 
 char chordal_hold_handedness(keypos_t key) {
+    if (key.row == 4 || key.row == 9) {
+        return '*';
+    }
     return key.row < MATRIX_ROWS / 2 ? 'L' : 'R';
 }
 

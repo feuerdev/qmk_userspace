@@ -16,6 +16,20 @@
 #define COMBO_TERM_BOOT 60
 
 /*
+ * Procyon pointer speed: upstream defaults map the saved default index 3 to
+ * 1000 CPI (400 + 3 * 200). This clone feels too fast, so use a lower range:
+ * default index 3 maps to 500 CPI (200 + 3 * 100).
+ */
+#define DILEMMA_MINIMUM_DEFAULT_DPI 200
+#define DILEMMA_DEFAULT_DPI_CONFIG_STEP 100
+
+/*
+ * Procyon touch sensitivity: upstream defaults to MXT_TOUCH_THRESHOLD 18.
+ * Raise the threshold so light incidental touches are less likely to register.
+ */
+#define MXT_TOUCH_THRESHOLD 24
+
+/*
  * USB master detection: this PCB does not match upstream USB_VBUS_PIN GP19.
  * Use QMK's polled detect with a longer timeout.
  */

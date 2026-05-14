@@ -106,6 +106,9 @@ BOOT     F10      F1       F2       F3                     Play     Stop     Mut
 Pointer controls:
 
 - `DPI+` / `DPI-`: cycle normal pointer DPI.
+- Pointer speed is intentionally lower than upstream. The saved default DPI
+  index maps to `500 CPI` instead of upstream's `1000 CPI`.
+- Runtime DPI steps are `100 CPI` instead of upstream's `200 CPI`.
 
 Media controls:
 
@@ -278,6 +281,25 @@ Runtime controls are on the FUNC layer:
 
 - normal DPI up/down
 
+The normal pointer DPI range is lowered in `config.h`:
+
+```c
+#define DILEMMA_MINIMUM_DEFAULT_DPI 200
+#define DILEMMA_DEFAULT_DPI_CONFIG_STEP 100
+```
+
+Upstream maps default index `3` to `1000 CPI`; this keymap maps it to
+`500 CPI`.
+
+Touch sensitivity is also reduced compared to upstream:
+
+```c
+#define MXT_TOUCH_THRESHOLD 24
+```
+
+Upstream defaults this to `18`; the higher threshold requires a more deliberate
+touch before the sensor reports contact.
+
 ## Tap-Hold Configuration
 
 The keymap uses QMK's core tap-hold options to approximate the Totem ZMK home-row
@@ -305,6 +327,10 @@ Handedness for Chordal Hold:
 
 - Rows in the left half are treated as left hand.
 - Rows in the right half are treated as right hand.
+- Thumb rows are treated as wildcard hand (`'*'`), so thumb hold-taps can chord
+  with either hand. This keeps the right middle thumb, Backspace when tapped and
+  Shift when held, from being forced into a same-hand tap decision when followed
+  by a right-hand key.
 
 ## Split And Hardware Config
 
@@ -367,4 +393,7 @@ From `config.h`:
 #define COMBO_TERM 50
 #define COMBO_TERM_PER_COMBO
 #define COMBO_SHOULD_TRIGGER
+#define DILEMMA_MINIMUM_DEFAULT_DPI 200
+#define DILEMMA_DEFAULT_DPI_CONFIG_STEP 100
+#define MXT_TOUCH_THRESHOLD 24
 ```
