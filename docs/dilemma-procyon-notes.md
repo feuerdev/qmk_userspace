@@ -1,276 +1,344 @@
-# Dilemma Procyon Firmware Notes
+# Dilemma Procyon Clone Firmware Notes
 
-Created: 2026-05-13
+Investigation started: 2026-05-13. Bring-up completed: 2026-05-14.
 
-## Goal
+## Summary
 
-Build a custom QMK firmware for the new AliExpress keyboard, using the existing
-Totem layout as the main layout reference and the existing Scylla QMK keymap as
-the implementation reference.
+This keyboard is an AliExpress "Dilemma Max" clone, not an official
+BastardKB Dilemma target. The working firmware is based on BastardKB's
+`4x6_4_procyon` target, with substantial keymap-level overrides for the
+clone PCB.
 
-No firmware implementation has been started yet.
+Working as of 2026-05-14:
 
-## Hardware Assumptions
+- Both halves enumerate and type.
+- Split communication works over the USB-C interconnect.
+- All matrix keys work on both halves.
+- Both rotary encoders work.
+- The Procyon/MaxTouch trackpad works.
+- RP2040 bootloader recovery works on both halves.
 
-- The sales listing says "Dilemma Max" and "4x6", but the photos and purchase
-  context indicate a 3x5 MX split Dilemma variant.
-- Procyon is confirmed by text printed on the PCB.
-- Two rotary encoders are installed.
-- The initially suspected upstream hardware target is:
-  `bastardkb/dilemma/3x5_3_procyon`
-- This is not the same as the older local target:
-  `bastardkb/dilemma/3x5_3`
-- Important uncertainty: the upstream Dilemma hardware README lists
-  `3x5_3_procyon` as Choc V1 hotswap. Since this board is MX and Procyon, it may
-  be a seller-custom/clone variant rather than an exact BastardKB V3 target.
+The current `feuerdev` keymap is still a bring-up/test keymap. The final
+Totem-style layout port has not started.
 
-## Upstream References
+## Hardware
+
+Observed physical hardware:
+
+- RP2040 controller on each half.
+- 3x6 MX switch matrix per half.
+- 3 thumb keys per half.
+- 1 rotary encoder per half.
+- Procyon/MaxTouch trackpad module.
+- USB-C-shaped connector between halves, not TRRS.
+- Two underside buttons near the inter-half connector. The lower button is
+  BOOT/BOOTSEL: hold it while plugging USB to mount `RPI-RP2`.
+- Running firmware enumerates on macOS as `Dilemma Max`,
+  USB VID/PID `0xA8F8:0x1837`.
+
+Initial bootloader observation on both halves:
+
+```text
+UF2 Bootloader v3.0
+Model: Raspberry Pi RP2
+Board-ID: RPI-RP2
+```
+
+This likely meant the board was shipped blank or bootloader-only. No useful
+factory firmware backup was available.
+
+The seller's board resembles a "Dilemma Max 3x6" variant. BastardKB's Quentin
+has stated that no official Dilemma Max 3x6 exists, so this should be treated
+as a clone with custom PCB routing.
+
+## Working Target
+
+QMK base:
+
+```text
+bastardkb-qmk
+branch: bkb-procyon
+target: bastardkb/dilemma/4x6_4_procyon
+```
+
+Userspace keymap:
+
+```text
+qmk_userspace/keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/feuerdev
+```
+
+Local build command:
+
+```sh
+make bastardkb/dilemma/4x6_4_procyon:feuerdev
+```
+
+UF2 output:
+
+```text
+qmk_userspace/bastardkb_dilemma_4x6_4_procyon_feuerdev.uf2
+```
+
+Local QMK setup:
+
+- `qmk config user.qmk_home` points to
+  `/Users/jannik/Documents/DEV/feuerdev/bastardkb-qmk`
+- `qmk config user.overlay_dir` points to
+  `/Users/jannik/Documents/DEV/feuerdev/qmk_userspace`
+- `qmk_userspace/Makefile` adds the Homebrew ARM toolchain paths needed for
+  local builds.
+
+Important: `qmk.json` should target `4x6_4_procyon:feuerdev` before relying on
+GitHub Actions for this board.
+
+## Firmware Overrides
+
+The working hardware overrides live in:
+
+```text
+keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/feuerdev/config.h
+```
+
+### USB Master Detection
+
+Upstream uses `USB_VBUS_PIN GP19`. This clone does not route VBUS there, so the
+half with USB could misidentify as the slave. The working config uses QMK's USB
+detect polling with a long timeout:
+
+```c
+#undef USB_VBUS_PIN
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 10000
+```
+
+The default timeout was too short during diagnostics. Ten seconds has been
+reliable.
+
+### Handedness
+
+Upstream uses `SPLIT_HAND_PIN GP29`. This clone does not appear to provide a
+usable handedness signal there. The working config disables pin-based
+handedness and declares the USB-connected half as right:
+
+```c
+#undef SPLIT_HAND_PIN
+#undef SPLIT_HAND_PIN_LOW_IS_LEFT
+#define MASTER_RIGHT
+```
+
+Normal use expects USB on the right half.
+
+### Matrix
+
+The matrix is asymmetric. The same RP2040 pins are used on both halves, but not
+with the same row/column roles.
+
+Working config:
+
+```c
+#undef MATRIX_ROW_PINS
+#undef MATRIX_COL_PINS
+#undef DIODE_DIRECTION
+#define MATRIX_ROW_PINS       { GP15, GP6,  GP12, GP18, GP17 }
+#define MATRIX_COL_PINS       { GP10, GP8,  GP7,  GP5,  GP13, GP9 }
+#define MATRIX_ROW_PINS_RIGHT { GP15, GP12, GP13, GP17, GP18 }
+#define MATRIX_COL_PINS_RIGHT { GP5,  GP6,  GP7,  GP8,  GP9,  GP10 }
+#define DIODE_DIRECTION ROW2COL
+```
+
+Interpretation:
+
+- `MATRIX_ROW_PINS` / `MATRIX_COL_PINS` apply to the left half.
+- `MATRIX_ROW_PINS_RIGHT` / `MATRIX_COL_PINS_RIGHT` apply to the right half.
+- Row `0` / `5`, using `GP15`, is a phantom row retained to fit the upstream
+  `4x6_4_procyon` matrix shape.
+- The real rows are top, middle, bottom, thumb.
+- `col[0]` is the outer pinky column on both halves, following BastardKB's
+  mirrored layout convention.
+- The clone uses `ROW2COL`, opposite of the upstream Procyon target.
+
+Physical row mapping:
+
+```text
+Left:
+  top    GP6
+  middle GP12
+  bottom GP18
+  thumbs GP17
+  cols outer -> inner: GP10, GP8, GP7, GP5, GP13, GP9
+
+Right:
+  top    GP12
+  middle GP13
+  bottom GP17
+  thumbs GP18
+  cols outer -> inner: GP5, GP6, GP7, GP8, GP9, GP10
+```
+
+The working keymap bypasses the upstream `LAYOUT` macro and addresses
+`keymaps[][MATRIX_ROWS][MATRIX_COLS]` directly. This exposes all 3 thumb keys
+per side, including positions the upstream `LAYOUT` macro does not expose.
+
+### Split Serial
+
+The USB-C inter-half cable carries two crossed data wires:
+
+```text
+left/slave GP0 <-> right/master GP1
+left/slave GP1 <-> right/master GP0
+```
+
+Half-duplex `SOFT_SERIAL_PIN GP1` cannot work on this wiring because each side's
+same-named pin is not connected to the other side's same-named pin. Full duplex
+does work:
+
+```c
+#undef SOFT_SERIAL_PIN
+#define SERIAL_USART_FULL_DUPLEX
+#define SERIAL_USART_TX_PIN GP0
+#define SERIAL_USART_RX_PIN GP1
+```
+
+The pin swap happens in the cable/PCB routing. Both halves use the same config.
+
+### Rotary Encoders
+
+Both encoders use the same pins:
+
+```c
+#undef ENCODER_A_PINS
+#undef ENCODER_B_PINS
+#define ENCODER_A_PINS { GP14 }
+#define ENCODER_B_PINS { GP16 }
+```
+
+The current test keymap maps:
+
+- left encoder: volume up/down
+- right encoder: page up/down
+
+Encoder support is enabled by the inherited target/keymap build settings. Keep
+these overrides if the keymap is moved into a custom target later.
+
+### Trackpad
+
+The Procyon/MaxTouch trackpad works with the upstream I2C pins:
+
+```text
+SDA GP2
+SCL GP3
+```
+
+The upstream motion/interrupt pin is not usable on this clone because upstream
+uses `GP12`, which this PCB uses in the keyboard matrix. The working config
+undefines the motion pin and lets QMK poll the digitizer:
+
+```c
+#undef DIGITIZER_MOTION_PIN
+#undef DIGITIZER_MOTION_PIN_ACTIVE_LOW
+```
+
+Rules:
+
+```make
+POINTING_DEVICE_ENABLE = yes
+MAXTOUCH_DEBUG = no
+```
+
+Polling is less elegant than interrupt-driven motion reporting, but it works
+without identifying whether this clone routes a separate motion pin.
+
+## Current Keymap
+
+The current keymap is intentionally simple and test-focused:
+
+- Totem-inspired alpha order.
+- No home-row mods yet.
+- No combos yet.
+- No Achordion yet.
+- No final symbol/navigation/number layers yet.
+- Direct matrix addressing instead of the upstream `LAYOUT` macro.
+
+Special bootloader behavior:
+
+- `QK_BOOT` is available on bottom outer pinky positions for flashing.
+- `ENT_OR_BOOT` sends `KC_ENT` during normal split use.
+- If a half is plugged in alone and the split transport is absent,
+  `ENT_OR_BOOT` enters the bootloader instead. This provides a left-solo
+  bootloader path despite `MASTER_RIGHT` remapping.
+
+## Flashing
+
+Standard RP2040 UF2 flow:
+
+1. Put the half into bootloader mode.
+2. Wait for the `RPI-RP2` volume.
+3. Copy the UF2 to the volume.
+4. The volume disappears and the half reboots.
+
+Reliable hardware fallback:
+
+```text
+Hold lower underside BOOT button while plugging USB.
+```
+
+Flash both halves after changes to matrix, split transport, encoder, pointing
+device, or QMK version. For normal use, connect USB to the right half.
+
+## Diagnostics History
+
+Useful diagnostics that led to the working config:
+
+- `3x5_3_procyon` was tried first because the board was initially thought to be
+  3x5. It is the wrong physical target.
+- Upstream `4x6_4_procyon` was closer in shape, but did not work unmodified.
+- Forcing the board to master proved USB/HID was healthy and VBUS detection was
+  the first blocker.
+- Pin probing showed the upstream matrix pins were wrong.
+- Pin probing also showed the diode direction was `ROW2COL`.
+- Separate probing of each half showed asymmetric matrix wiring.
+- Split probing showed the USB-C interconnect is crossed GP0/GP1, requiring
+  full-duplex serial.
+- Encoder probing identified `GP14` / `GP16` for both encoders.
+- Re-enabling the Procyon with upstream I2C pins and no motion pin confirmed the
+  trackpad works by polling.
+
+Diagnostic keymaps currently live under:
+
+```text
+keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/pinprobe
+keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/splitprobe
+keyboards/bastardkb/dilemma/4x6_4_procyon/keymaps/encoderprobe
+```
+
+They are useful historical tools, but not part of the final user layout.
+
+## External References
 
 - BastardKB Dilemma hardware repo:
   https://github.com/Bastardkb/Dilemma
-- BastardKB Dilemma V3 firmware docs:
+- BastardKB Procyon firmware docs:
   https://docs.bastardkb.com/fw/procyon-compile.html
 - BastardKB flashing docs:
   https://docs.bastardkb.com/fw/flashing.html
 - Procyon hardware repo:
   https://github.com/george-norton/procyon
-- Procyon QMK/ZMK status:
-  https://github.com/george-norton/procyon#software-support
+- Ghostbuster91 Dilemma 3x6_3 QMK fork, useful as a 3x6 reference but not a
+  drop-in target because it is Cirque-based:
+  https://github.com/ghostbuster91/qmk_firmware/tree/bkb-master/keyboards/bastardkb/dilemma/3x6_3
+- Reddit thread confirming no official Dilemma Max 3x6:
+  https://www.reddit.com/r/ErgoMechKeyboards/comments/1s9grl2/
 
-## What the Repos Show
+## Remaining Work
 
-### Local `bastardkb-qmk`
-
-- Current branch: `bkb-master`
-- Remote: `https://github.com/bastardkb/bastardkb-qmk`
-- The local Dilemma targets are Cirque-based:
-  - `bastardkb/dilemma/3x5_2`
-  - `bastardkb/dilemma/3x5_3`
-  - `bastardkb/dilemma/4x6_4`
-- The local `3x5_3` target uses:
-  - RP2040
-  - `bootloader = rp2040`
-  - split soft serial on `GP1`
-  - handedness pin `GP29`
-  - Cirque Pinnacle over SPI
-  - one encoder definition in the JSON, mapped as two encoders by the split
-  - RGB matrix with split count `[36, 36]`
-
-This local branch should not be used as-is for the new keyboard if the touchpad
-is really Procyon.
-
-### Upstream Dilemma Hardware Repo
-
-The Dilemma hardware README lists these relevant variants:
-
-- `3x5_3`: Dilemma V2, Cirque, MX/Choc, underglow, per-key RGB, rotary encoders.
-- `3x5_3_procyon`: Dilemma V3 hotswap, Procyon, Choc V1, underglow, per-key RGB,
-  rotary encoders, VIK.
-- `4x6_4_procyon`: Dilemma MAX V3 hotswap, Procyon, Choc V1.
-
-The Procyon aspect is confirmed, but the MX switch variant makes the exact
-target uncertain.
-
-### BastardKB Procyon Firmware Docs
-
-BastardKB documents Dilemma V3 / Dilemma MAX V3 separately from the older
-Dilemma targets. The key points:
-
-- The Procyon Dilemma code is on the `bkb-procyon` branch, not `bkb-master`.
-- The example keyboard target is:
-  `bastardkb/dilemma/3x5_3_procyon`
-- A custom keymap should live in:
-  `keyboards/bastardkb/dilemma/3x5_3_procyon/keymaps/<keymap_name>`
-- Local build example:
-  `qmk compile -c -kb bastardkb/dilemma/3x5_3_procyon -km <keymap_name>`
-
-### Local `qmk_userspace`
-
-- Current branch: `main`
-- Remote: `https://github.com/feuerdev/qmk_userspace.git`
-- `qmk.json` currently builds only:
-  `["bastardkb/scylla", "feuerdev"]`
-- Existing Scylla keymap already has QMK equivalents for several Totem ideas:
-  - Hands-down-ish alpha layout: `Q W F P B` / `J L U Y -`
-  - home row mods
-  - combos for escape, copy/cut/paste, symbols, email
-  - custom shift keys
-  - Achordion
-  - swapper helper for window switching
-
-This makes Scylla the best local QMK implementation template.
-
-### Local `zmk-config-totem`
-
-The Totem layout is the desired user-facing behavior reference:
-
-- Layers:
-  - `BASE`
-  - `NAV`
-  - `FUNC`
-  - `NUM`
-  - `QWERTZ`
-  - `GAME`
-- Layout traits:
-  - 3x5-ish core with extra outer bottom keys and 3 thumb keys per side.
-  - hold-tap numbers on the top alpha row.
-  - home row mods on `A R S T` and `N E I O`.
-  - custom shifted punctuation behavior.
-  - many symbol and app shortcut combos.
-  - bootloader combo.
-
-The Dilemma `3x5_3_procyon` has 36 physical keys, while the Totem keymap uses
-38 positions. The future port needs a deliberate decision for the two keys that
-exist on Totem but not on Dilemma.
-
-## Firmware Backup and Restore
-
-### Current plug-in observation
-
-When plugged in, the keyboard exposes only the RP2040 bootloader mass-storage
-files: an HTML file pointing to the Raspberry Pi website and a text info file.
-That normally means the controller is in BOOTSEL / `RPI-RP2` mode, not running
-keyboard firmware.
-
-Observed `INFO_UF2.TXT` contents:
-
-```text
-Right:
-UF2 Bootloader v3.0
-Model: Raspberry Pi RP2
-Board-ID: RPI-RP2
-
-Left:
-UF2 Bootloader v3.0
-Model: Raspberry Pi RP2
-Board-ID: RPI-RP2
-```
-
-Likely explanations:
-
-- The controller is blank or does not contain valid firmware.
-- The controller was intentionally shipped in bootloader mode.
-- A BOOT/BOOTSEL or reset/update control is stuck or held.
-- Less likely: the wrong half or a disconnected/failed split setup is masking
-  the expected keyboard behavior.
-
-If this is the only USB behavior on both halves, there may be no shipped
-QMK/Vial firmware to back up or restore.
-
-### Can the current firmware be extracted?
-
-If firmware is present, probably yes at the RP2040 flash level, but not as
-useful source code. If the board is blank, extraction will only produce an empty
-or bootloader-only flash image.
-
-For RP2040 boards, `picotool save` can save the installed program or the full
-flash while the board is in BOOTSEL / `RPI-RP2` mode. This can produce a `.uf2`
-or `.bin` backup. That backup is a binary image, not the original QMK source,
-keymap C code, or Vial/VIA JSON.
-
-Useful commands once `picotool` is installed:
-
-```sh
-picotool info
-picotool save current-firmware.uf2 -t uf2
-picotool save -a current-full-flash.uf2 -t uf2
-```
-
-Current local state: `picotool` is not installed on this machine.
-
-### Can the current firmware be restored later?
-
-Yes, if a valid backup was created before flashing.
-
-Restore options:
-
-- Put the keyboard half into RP2040 bootloader mode.
-- Copy the saved `.uf2` to the `RPI-RP2` drive, or use `picotool load`.
-- Repeat for the other half if both halves were backed up/flashed.
-
-Important caveats:
-
-- A binary backup restores firmware bytes, not source.
-- Dynamic Vial/VIA settings may live in EEPROM/flash storage. A full-flash
-  backup is safer than program-only if the goal is a practical rollback.
-- If the AliExpress firmware is not built from public BastardKB sources, the
-  backup is the only exact way back to that shipped image.
-- If the board was shipped blank, there is no current keyboard firmware to
-  revert to. The fallback becomes a known-good firmware built from source.
-- Vial can usually export/save the dynamic keymap configuration, but that is not
-  a firmware backup.
-
-## Flashing Process
-
-The board is RP2040-based if it follows the BastardKB Dilemma V3 design.
-
-High-level process:
-
-1. Build or obtain a `.uf2` firmware image for the exact board target.
-2. Put one keyboard half into bootloader mode.
-3. Wait for the `RPI-RP2` USB drive to appear.
-4. Copy the `.uf2` file onto that drive, or use `qmk flash`.
-5. The drive disappears and the keyboard reboots.
-6. Flash the other half too if the QMK version, RGB behavior, encoder behavior,
-   split behavior, or pointing-device behavior changed.
-
-Bootloader entry methods documented by BastardKB:
-
-- `QK_BOOT` keycode, if the current keymap exposes it.
-- Bootmagic, by holding the configured bootmagic key while plugging in USB.
-- Double-tap the keyboard's reset/update button within 500 ms.
-- Hardware fallback: hold the BOOT/BOOTSEL button while plugging in USB.
-
-For the Dilemma family, BastardKB notes that the default firmware expects USB on
-the right side during normal use.
-
-## First Safe Steps When the Keyboard Arrives
-
-1. Plug in each half separately without flashing anything.
-2. Record whether each half appears as a keyboard or as the `RPI-RP2`
-   bootloader drive.
-3. If a half appears as a keyboard, try Vial and VIA, then export/save any
-   dynamic layout configuration.
-4. If a half appears only as `RPI-RP2`, inspect the text info file and save its
-   contents in these notes.
-5. Install `picotool`.
-6. If `picotool info` can see a program image, save program-only and full-flash
-   backups for each half before flashing.
-7. If both halves are blank or bootloader-only, build and flash a known-good
-   firmware for the exact hardware target.
-
-## Open Questions
-
-- Is the PCB electrically compatible with BastardKB `3x5_3_procyon`, despite
-  being MX rather than the upstream-documented Choc V1 hotswap variant?
-- Is the firmware Vial, VIA, or a custom fork?
-- Was the keyboard shipped blank, or is a boot/reset control causing it to enter
-  bootloader mode every time?
-- Does each half expose the expected reset/update/boot hardware access without
-  disassembly?
-- Does the AliExpress board use unmodified BastardKB V3 PCBs, or a clone with
-  pin/layout changes?
-- Does the right encoder/left encoder match the BastardKB defaults, or did the
-  seller customize the encoder map?
-
-## Future Implementation Direction
-
-Initial scaffold setup:
-
-- `qmk_userspace` now has a `dilemma-procyon` branch.
-- `bastardkb-qmk` has the `bkb-procyon` branch fetched locally.
-- The upstream BastardKB Procyon `vendor` keymap has been copied into:
-  `keyboards/bastardkb/dilemma/3x5_3_procyon/keymaps/vendor`
-- A `feuerdev` keymap scaffold has been copied from that vendor keymap:
-  `keyboards/bastardkb/dilemma/3x5_3_procyon/keymaps/feuerdev`
-- `qmk.json` now builds:
-  `["bastardkb/dilemma/3x5_3_procyon", "feuerdev"]`
-- The GitHub Actions workflow now targets BastardKB QMK `bkb-procyon`.
-
-Still to do:
-
-- Port the Totem layout behavior using the existing Scylla QMK code where
-  possible.
-- Decide how to handle the Totem-only extra keys before writing the keymap.
-- Keep a `QK_BOOT` path and a physical bootloader fallback available in early
-  builds.
+- Update `qmk.json` to build `bastardkb/dilemma/4x6_4_procyon:feuerdev` for
+  GitHub Actions.
+- Decide whether to keep the current keymap-level overrides or create a proper
+  custom userspace keyboard target for this clone.
+- Port the real Totem layout behavior using the Scylla QMK keymap as the main
+  implementation reference.
+- Decide final behavior for the extra outer columns and all six thumb clusters.
+- Tune pointer features: DPI steps, drag-scroll, sniping, and optional pointer
+  layer behavior.
+- Decide whether the diagnostic keymaps should stay in-tree or be removed after
+  the final target/keymap settles.
