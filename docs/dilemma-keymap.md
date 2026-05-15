@@ -80,16 +80,19 @@ Hold left middle thumb, `NAV/SPC`, to access NAV.
 
 ```text
 Left                                             Right
-HYPR-Q   HYPR-W   HYPR-F   HYPR-P   HYPR-B      HYPR-J   GUI-`    Up       HYPR-Y
-Shift    Ctrl     Alt      GUI      HYPR-G      HYPR-M   Left     Down     Right    HYPR-O
-HYPR-;   HYPR-Z   HYPR-X   HYPR-C   HYPR-D HYPR-V                 GUI-[    GUI-]
+HYPR-Q   HYPR-W   HYPR-F   HYPR-P   MEH-B       MEH-J    GUI-`    Up       MEH-Y    MEH--
+Shift    Ctrl     Alt      GUI      MEH-G       MEH-M    Left     Down     Right    MEH-O
+HYPR-;   HYPR-Z   HYPR-X   HYPR-C   HYPR-D MEH-V         MEH-K    MEH-H    SGUI-[   SGUI-]  MEH-/    MEH-'
                            trans    trans trans S-Enter  A-Bspc
 ```
 
 Notable uses:
 
+- `HYPR-*` means Control + Shift + Alt + GUI.
+- `MEH-*` means Control + Shift + Alt, without GUI.
+- `SGUI-*` means Shift + GUI.
 - Right-side arrows are on the right home cluster.
-- `GUI-[` and `GUI-]` are previous/next tab-style shortcuts on the bottom right.
+- `SGUI-[` and `SGUI-]` are previous/next tab-style shortcuts on the bottom right.
 - Right thumb alternatives provide shifted Enter and alt Backspace.
 
 ## FUNC Layer

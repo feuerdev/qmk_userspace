@@ -123,15 +123,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NAV] = {
         // LEFT
         /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 1 top     */ { XXXXX,   HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P),  HYPR(KC_B)   },
-        /* row 2 middle  */ { XXXXX,   KC_LSFT, KC_LCTL, KC_LALT,      KC_LGUI,         HYPR(KC_G)   },
-        /* row 3 bottom  */ { HYPR(KC_SCLN), HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), HYPR(KC_V) },
+        /* row 1 top     */ { XXXXX,   HYPR(KC_Q), HYPR(KC_W), HYPR(KC_F), HYPR(KC_P),  MEH(KC_B)    },
+        /* row 2 middle  */ { XXXXX,   KC_LSFT, KC_LCTL, KC_LALT,      KC_LGUI,         MEH(KC_G)    },
+        /* row 3 bottom  */ { HYPR(KC_SCLN), HYPR(KC_Z), HYPR(KC_X), HYPR(KC_C), HYPR(KC_D), MEH(KC_V) },
         /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      KC_TRNS,         KC_TRNS      },
         // RIGHT
         /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 6 top     */ { XXXXX,   XXXXX,   HYPR(KC_Y), KC_UP,     LGUI(KC_GRV),    HYPR(KC_J)   },
-        /* row 7 middle  */ { XXXXX,   HYPR(KC_O), KC_RGHT, KC_DOWN,   KC_LEFT,         HYPR(KC_M)   },
-        /* row 8 bottom  */ { XXXXX,   XXXXX,   LGUI(KC_RBRC), LGUI(KC_LBRC), XXXXX,    XXXXX        },
+        /* row 6 top     */ { XXXXX,   MEH(KC_MINS), MEH(KC_Y), KC_UP, LGUI(KC_GRV),    MEH(KC_J)    },
+        /* row 7 middle  */ { XXXXX,   MEH(KC_O), KC_RGHT, KC_DOWN,    KC_LEFT,         MEH(KC_M)    },
+        /* row 8 bottom  */ { MEH(KC_QUOT), MEH(KC_SLSH), LSG(KC_RBRC), LSG(KC_LBRC), MEH(KC_H), MEH(KC_K) },
         /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      LALT(KC_BSPC),   S(KC_ENT)    },
     },
 
