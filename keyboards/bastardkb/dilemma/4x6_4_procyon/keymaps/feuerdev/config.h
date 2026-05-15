@@ -34,7 +34,7 @@
  * Two-finger scroll scaling for the digitizer mouse fallback. Upstream defaults
  * to 10; larger values produce slower scroll wheel reports.
  */
-#define DIGITIZER_SCROLL_DIVISOR 50
+#define DIGITIZER_SCROLL_DIVISOR 150
 #define DILEMMA_REVERSE_DIGITIZER_SCROLL
 
 /*
