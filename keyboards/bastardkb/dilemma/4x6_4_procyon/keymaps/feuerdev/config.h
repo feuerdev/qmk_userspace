@@ -1,6 +1,6 @@
 #pragma once
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 #define TAPPING_TERM 250
 #define PERMISSIVE_HOLD
 #define FLOW_TAP_TERM 150
@@ -8,7 +8,6 @@
 #define SPECULATIVE_HOLD
 #define COMBO_TERM 50
 #define COMBO_TERM_PER_COMBO
-#define COMBO_SHOULD_TRIGGER
 
 #define COMBO_TERM_FAST 24
 #define COMBO_TERM_SLOW 40
@@ -24,10 +23,19 @@
 #define DILEMMA_DEFAULT_DPI_CONFIG_STEP 100
 
 /*
- * Procyon touch sensitivity: upstream defaults to MXT_TOUCH_THRESHOLD 18.
- * Raise the threshold so light incidental touches are less likely to register.
+ * Procyon touch sensitivity: Procyon defaults to MXT_TOUCH_THRESHOLD 20.
+ * Keep that threshold, but lower touch hysteresis from the Procyon default 10
+ * so releases are less sticky.
  */
-#define MXT_TOUCH_THRESHOLD 24
+#define MXT_TOUCH_THRESHOLD 20
+#define MXT_TOUCH_HYST 5
+
+/*
+ * Two-finger scroll scaling for the digitizer mouse fallback. Upstream defaults
+ * to 10; larger values produce slower scroll wheel reports.
+ */
+#define DIGITIZER_SCROLL_DIVISOR 50
+#define DILEMMA_REVERSE_DIGITIZER_SCROLL
 
 /*
  * USB master detection: this PCB does not match upstream USB_VBUS_PIN GP19.

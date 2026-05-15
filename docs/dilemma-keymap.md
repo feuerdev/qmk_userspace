@@ -38,7 +38,7 @@ Base is a Totem-style alpha layout with home-row mods and top-row number holds.
 Left                                      Right
 Q/1      W/2      F/3      P/4      B/5  J/6      L/7      U/8      Y/9      -/0
 SFT(A)   CTL(R)   ALT(S)   GUI(T)   G    M        GUI(N)   ALT(E)   CTL(I)   SFT(O)
-:        Z        X        C        D    V        K        H        ,        .        /        '
+:        Z/ß      X        C        D    V/Ü      K        H        ,        .        /        '
                   HYPR     NAV/SPC  TAB  NUM/ENT  SFT/BSPC FUNC/DEL
 ```
 
@@ -47,6 +47,13 @@ Top-row number holds:
 - Tap `Q W F P B J L U Y -` for the letters/symbol.
 - Hold the same keys for `1 2 3 4 5 6 7 8 9 0`.
 - Hold threshold is `TOP_NUM_TERM = 300 ms`.
+
+Alt character holds:
+
+- Tap `Z` for `Z`; hold it for `Alt+S`, used as `ß` on the Totem/macOS setup.
+- Tap `V` for `V`; hold it for `Alt+U`, used as `Ü` / umlaut input on the
+  Totem/macOS setup.
+- Hold threshold is `ALT_HOLD_TERM = 170 ms`.
 
 Home-row mods:
 
@@ -83,7 +90,7 @@ Left                                             Right
 HYPR-Q   HYPR-W   HYPR-F   HYPR-P   MEH-B       MEH-J    GUI-`    Up       MEH-Y    MEH--
 Shift    Ctrl     Alt      GUI      MEH-G       MEH-M    Left     Down     Right    MEH-O
 HYPR-;   HYPR-Z   HYPR-X   HYPR-C   HYPR-D MEH-V         MEH-K    MEH-H    SGUI-[   SGUI-]  MEH-/    MEH-'
-                           trans    trans trans S-Enter  A-Bspc
+                           trans    trans trans S-Enter  A-Bspc  A-Del
 ```
 
 Notable uses:
@@ -93,7 +100,7 @@ Notable uses:
 - `SGUI-*` means Shift + GUI.
 - Right-side arrows are on the right home cluster.
 - `SGUI-[` and `SGUI-]` are previous/next tab-style shortcuts on the bottom right.
-- Right thumb alternatives provide shifted Enter and alt Backspace.
+- Right thumb alternatives provide shifted Enter, alt Backspace, and alt Delete.
 
 ## FUNC Layer
 
@@ -156,30 +163,6 @@ Shift    Z        X        C        V    B        N        M        ,        .  
                   Ctrl     Space    Tab  Enter    Bspc     Del
 ```
 
-## SPEED Layer
-
-SPEED is a toggle layer for fast plain typing. It removes home-row mods, top-row
-number holds, and most combos.
-
-Toggle it with:
-
-- `Z` + `/`
-
-```text
-Left                                      Right
-Q        W        F        P        B    J        L        U        Y        -
-A        R        S        T        G    M        N        E        I        O
-:        Z        X        C        D    V        K        H        ,        .        /        '
-                  HYPR     Space    Tab  Enter    Bspc     Del
-```
-
-While SPEED is active:
-
-- The speed-toggle combo still works, so the layer can be turned off.
-- Other combos are disabled through `combo_should_trigger()`.
-- Home-row mod keys are replaced by plain letters.
-- Top-row number hold keys are replaced by plain letters.
-
 ## Combos
 
 Combo timing:
@@ -193,7 +176,6 @@ Layer and system combos:
 
 | Chord | Action |
 | --- | --- |
-| `Z` + `/` | Toggle SPEED |
 | bottom-left outer `:` + bottom-right outer `'` | Bootloader |
 | top-left outer + top-right outer | Toggle QWERTZ |
 | `A` + `O` home-row mod keys | Caps Word |
@@ -204,7 +186,7 @@ Editing combos:
 | --- | --- |
 | `W/2` + `F/3` | Escape |
 | `Q/1` + `W/2` | Control-C |
-| `Z` + `X` | GUI-X |
+| `Z/ß` + `X` | GUI-X |
 | `X` + `D` | GUI-X |
 | `X` + `C` | GUI-C |
 | `C` + `D` | GUI-V |
@@ -297,11 +279,24 @@ Upstream maps default index `3` to `1000 CPI`; this keymap maps it to
 Touch sensitivity is also reduced compared to upstream:
 
 ```c
-#define MXT_TOUCH_THRESHOLD 24
+#define MXT_TOUCH_THRESHOLD 20
+#define MXT_TOUCH_HYST 5
 ```
 
-Upstream defaults this to `18`; the higher threshold requires a more deliberate
-touch before the sensor reports contact.
+The Procyon default threshold is `20`; this keymap keeps that threshold. Touch
+hysteresis is lowered from the Procyon default `10` to `5`, so releases are less
+sticky.
+
+Two-finger scroll is slowed down and reversed in firmware:
+
+```c
+#define DIGITIZER_SCROLL_DIVISOR 50
+#define DILEMMA_REVERSE_DIGITIZER_SCROLL
+```
+
+Upstream defaults the scroll divisor to `10`; larger values make wheel reports
+smaller. The keymap-level `pointing_device_task_user()` hook reverses horizontal
+and vertical scroll reports, while leaving cursor movement unchanged.
 
 ## Tap-Hold Configuration
 
@@ -392,11 +387,13 @@ MAXTOUCH_DEBUG = no
 From `config.h`:
 
 ```c
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 #define COMBO_TERM 50
 #define COMBO_TERM_PER_COMBO
-#define COMBO_SHOULD_TRIGGER
 #define DILEMMA_MINIMUM_DEFAULT_DPI 200
 #define DILEMMA_DEFAULT_DPI_CONFIG_STEP 100
-#define MXT_TOUCH_THRESHOLD 24
+#define MXT_TOUCH_THRESHOLD 20
+#define MXT_TOUCH_HYST 5
+#define DIGITIZER_SCROLL_DIVISOR 50
+#define DILEMMA_REVERSE_DIGITIZER_SCROLL
 ```

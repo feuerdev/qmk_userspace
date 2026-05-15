@@ -8,7 +8,6 @@ enum layers {
     FUNC,
     NUM,
     QWERTZ,
-    SPEED,
 };
 
 enum custom_keycodes {
@@ -22,12 +21,13 @@ enum custom_keycodes {
     NUM_U,
     NUM_Y,
     NUM_MINS,
+    ALT_Z,
+    ALT_V,
     EMAIL,
     ENT_OR_BOOT,
 };
 
 enum combo_events {
-    COMBO_TOGGLE_SPEED,
     COMBO_BOOTLOADER,
     COMBO_TOGGLE_QWERTZ_ON,
     COMBO_TOGGLE_QWERTZ_OFF,
@@ -66,6 +66,7 @@ enum combo_events {
 
 #define XXXXX KC_NO
 #define TOP_NUM_TERM 300
+#define ALT_HOLD_TERM 170
 
 #define HOME_A LSFT_T(KC_A)
 #define HOME_R LCTL_T(KC_R)
@@ -99,6 +100,11 @@ static top_num_key_t top_num_keys[] = {
     {NUM_MINS, KC_MINS, KC_0, false, false, 0},
 };
 
+static top_num_key_t alt_hold_keys[] = {
+    {ALT_Z, KC_Z, LALT(KC_S), false, false, 0},
+    {ALT_V, KC_V, LALT(KC_U), false, false, 0},
+};
+
 static bool     ent_or_boot_pressed     = false;
 static bool     ent_or_boot_interrupted = false;
 static uint16_t ent_or_boot_timer       = 0;
@@ -110,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
         /* row 1 top     */ { XXXXX,   NUM_Q,   NUM_W,   NUM_F,        NUM_P,           NUM_B        },
         /* row 2 middle  */ { XXXXX,   HOME_A,  HOME_R,  HOME_S,       HOME_T,          KC_G         },
-        /* row 3 bottom  */ { KC_COLN, KC_Z,    KC_X,    KC_C,         KC_D,            KC_V         },
+        /* row 3 bottom  */ { KC_COLN, ALT_Z,   KC_X,    KC_C,         KC_D,            ALT_V        },
         /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_HYPR,      LT(NAV, KC_SPC), KC_TAB       },
         // RIGHT (col 0 = outer pinky, col 5 = inner index)
         /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
@@ -132,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* row 6 top     */ { XXXXX,   MEH(KC_MINS), MEH(KC_Y), KC_UP, LGUI(KC_GRV),    MEH(KC_J)    },
         /* row 7 middle  */ { XXXXX,   MEH(KC_O), KC_RGHT, KC_DOWN,    KC_LEFT,         MEH(KC_M)    },
         /* row 8 bottom  */ { MEH(KC_QUOT), MEH(KC_SLSH), LSG(KC_RBRC), LSG(KC_LBRC), MEH(KC_H), MEH(KC_K) },
-        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_TRNS,      LALT(KC_BSPC),   S(KC_ENT)    },
+        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   LALT(KC_DEL), LALT(KC_BSPC),   S(KC_ENT)    },
     },
 
     [FUNC] = {
@@ -180,31 +186,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_DEL,       KC_BSPC,         KC_ENT       },
     },
 
-    [SPEED] = {
-        // LEFT
-        /* row 0 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 1 top     */ { XXXXX,   KC_Q,    KC_W,    KC_F,         KC_P,            KC_B         },
-        /* row 2 middle  */ { XXXXX,   KC_A,    KC_R,    KC_S,         KC_T,            KC_G         },
-        /* row 3 bottom  */ { KC_COLN, KC_Z,    KC_X,    KC_C,         KC_D,            KC_V         },
-        /* row 4 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_HYPR,      KC_SPC,          KC_TAB       },
-        // RIGHT
-        /* row 5 phantom */ { XXXXX,   XXXXX,   XXXXX,   XXXXX,        XXXXX,           XXXXX        },
-        /* row 6 top     */ { XXXXX,   KC_MINS, KC_Y,    KC_U,         KC_L,            KC_J         },
-        /* row 7 middle  */ { XXXXX,   KC_O,    KC_I,    KC_E,         KC_N,            KC_M         },
-        /* row 8 bottom  */ { KC_QUOT, KC_SLSH, KC_DOT,  KC_COMM,      KC_H,            KC_K         },
-        /* row 9 thumbs  */ { XXXXX,   XXXXX,   XXXXX,   KC_DEL,       KC_BSPC,         KC_ENT       },
-    },
 };
 // clang-format on
 
-const uint16_t PROGMEM speed_combo[] = {KC_Z, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM bootloader_combo[] = {KC_COLN, KC_QUOT, COMBO_END};
 const uint16_t PROGMEM qwertz_on_combo[] = {NUM_Q, NUM_MINS, COMBO_END};
 const uint16_t PROGMEM qwertz_off_combo[] = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM capsword_combo[] = {HOME_A, HOME_O, COMBO_END};
 const uint16_t PROGMEM esc_combo[] = {NUM_W, NUM_F, COMBO_END};
 const uint16_t PROGMEM ctrl_c_combo[] = {NUM_Q, NUM_W, COMBO_END};
-const uint16_t PROGMEM cut_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM cut_combo[] = {ALT_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM cut_alt_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM copy_combo[] = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM paste_combo[] = {KC_C, KC_D, COMBO_END};
@@ -233,7 +224,6 @@ const uint16_t PROGMEM star_fu_combo[] = {NUM_F, NUM_U, COMBO_END};
 const uint16_t PROGMEM plus_comma_c_combo[] = {KC_COMM, KC_C, COMBO_END};
 
 combo_t key_combos[] = {
-    [COMBO_TOGGLE_SPEED] = COMBO(speed_combo, TG(SPEED)),
     [COMBO_BOOTLOADER] = COMBO(bootloader_combo, QK_BOOT),
     [COMBO_TOGGLE_QWERTZ_ON] = COMBO(qwertz_on_combo, TG(QWERTZ)),
     [COMBO_TOGGLE_QWERTZ_OFF] = COMBO(qwertz_off_combo, TG(QWERTZ)),
@@ -289,11 +279,19 @@ static top_num_key_t *find_top_num_key(uint16_t keycode) {
     return NULL;
 }
 
+static top_num_key_t *find_alt_hold_key(uint16_t keycode) {
+    for (uint8_t i = 0; i < ARRAY_SIZE(alt_hold_keys); i++) {
+        if (alt_hold_keys[i].keycode == keycode) {
+            return &alt_hold_keys[i];
+        }
+    }
+    return NULL;
+}
+
 uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
         case COMBO_BOOTLOADER:
             return COMBO_TERM_BOOT;
-        case COMBO_TOGGLE_SPEED:
         case COMBO_TOGGLE_QWERTZ_ON:
         case COMBO_TOGGLE_QWERTZ_OFF:
             return COMBO_TERM_TOGGLE;
@@ -310,13 +308,6 @@ uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
         default:
             return COMBO_TERM_FAST;
     }
-}
-
-bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    if (combo_index == COMBO_TOGGLE_SPEED) {
-        return true;
-    }
-    return !layer_state_is(SPEED);
 }
 
 char chordal_hold_handedness(keypos_t key) {
@@ -346,6 +337,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(top_num_key->tap);
             }
             top_num_key->pressed = false;
+        }
+        return false;
+    }
+
+    top_num_key_t *alt_hold_key = find_alt_hold_key(keycode);
+    if (alt_hold_key != NULL) {
+        if (record->event.pressed) {
+            alt_hold_key->pressed = true;
+            alt_hold_key->held    = false;
+            alt_hold_key->timer   = timer_read();
+        } else {
+            if (!alt_hold_key->held) {
+                tap_code16(alt_hold_key->tap);
+            }
+            alt_hold_key->pressed = false;
         }
         return false;
     }
@@ -389,6 +395,20 @@ void matrix_scan_user(void) {
             top_num_keys[i].held = true;
         }
     }
+    for (uint8_t i = 0; i < ARRAY_SIZE(alt_hold_keys); i++) {
+        if (alt_hold_keys[i].pressed && !alt_hold_keys[i].held && timer_elapsed(alt_hold_keys[i].timer) >= ALT_HOLD_TERM) {
+            tap_code16(alt_hold_keys[i].hold);
+            alt_hold_keys[i].held = true;
+        }
+    }
+}
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+#ifdef DILEMMA_REVERSE_DIGITIZER_SCROLL
+    mouse_report.h = -mouse_report.h;
+    mouse_report.v = -mouse_report.v;
+#endif
+    return mouse_report;
 }
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
